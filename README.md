@@ -1,2 +1,2 @@
-# parser-combinators
-Presentation and workshop about parser combinators
+# Parser Combinators
+Presentation and workshop about parser combinators.
