@@ -11,7 +11,7 @@ This repository is split in the following parts.
 The `workshop` folder contains the material for, and instructions on how to run, the workshop.
 
 ### Presentation
-The `presentation` folder contains various presentation on parser combinators.
+The `presentation` folder contains various presentations on parser combinators.
 
 [workshop]: https://github.com/fifth-postulate/parser-combinators/tree/main/workshop
 [presentation]: https://github.com/fifth-postulate/parser-combinators/tree/main/presentation
