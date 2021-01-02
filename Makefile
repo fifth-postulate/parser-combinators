@@ -13,6 +13,8 @@ ${MATERIAL_DIR}: ${SUB_DIRECTORIES}
 	mkdir -p $@
 	cp -rf resources/material/* $@/
 	cp -rf workshop/guide/book $@/guide
+	mkdir -p $@/example
+	cp -rf workshop/example/* $@/example
 
 ${SUB_DIRECTORIES}:
 	${MAKE} -C $@
