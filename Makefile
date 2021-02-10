@@ -15,6 +15,7 @@ ${MATERIAL_DIR}: ${SUB_DIRECTORIES}
 	cp -rf workshop/guide/book $@/guide
 	mkdir -p $@/example
 	cp -rf workshop/example/* $@/example
+	cp -rf presentation $@/presentation
 
 ${SUB_DIRECTORIES}:
 	${MAKE} -C $@
