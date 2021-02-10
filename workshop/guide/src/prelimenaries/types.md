@@ -1,10 +1,7 @@
-# Types and Styles
-Not every programming language is the same. Among the characteristics in which programming languages can differ, we will highlight the following:
+# Types
+Not every programming language is the same. Among the characteristics in which programming languages can differ, we will highlight types in this section.
 
-* Types
-* Styles
-
-## Types
+## Type System
 A [_type system_][wikipedia:type-system] is
 
 > a logical system comprising a set of rules that assigns a property called a type to the various constructs of a computer program, such as variables, expressions, functions or modules.
@@ -17,31 +14,31 @@ Not every programming language uses types, and the programming languages that do
 
 In order to fascilitate the discussion we will introduce a type notation. This is a description of a certain type.
 
-### Notation
+## Notation
 In order get start the discussion we need to be able to express certain base types. Since we are talking a lot about languages, which are just a collection of _string_s we are going to include those in are notation.
 
-#### Base
+### Base
 The notation for base types include `string`, `integer`, `boolean` etcetera. These will form building blocks for more complex types. The are written with all lower-case letters.
 
-#### Type Variables
+### Type Variables
 Sometimes we need a type, but aren't interested in which concrete type it is. We will use _type variables_ for that. For example `T` is a type variable. It could be a `string`, `integer` or any other type. The are written with a starting capital letter. Often we will use a single letter. When we want to convey intent on how the type is used we could use words.
 
-#### Functions
+### Functions
 Functions are important and we will want to discuss them and their types. For example, the length of a string is a function. It accepts an argument of type `string` and return a value of type `integer`. We denote the type of the length function with `string -> integer`.
 
 In general if we have types `S` and `T`, a functions that maps values of type `S` into values of type `T` is denoted by `S -> T`.
 
-#### Pair
+### Pair
 We sometimes want to combine to pieces of information. For example, you could keep track of your age. At the moment that would be `("daan", 40)`. Notice that the first part is a value of type `string`. The second part is a value of type `integer`. The pair has type `(string, integer)`.
 
 For types `S` and `T`, the type of a pair of these values is denoted by `(S, T)`.
 
-#### List
+### List
 Sometimes we want discuss lists of things. An example would be a list of the names of your friends. The type of a list of `string`s is denoted by `[string]`.
 
 We can generalize that for an arbitrary type `T`. A list of `T`s is denoted by `[T]`.
 
-#### Summary
+### Summary
 In order to clearly express our thoughts we introduce types. There is a concrete notation to denote type, which consist of the following rules.
 
 1. We have some basic types like `string`, `integer`, etcetera.
