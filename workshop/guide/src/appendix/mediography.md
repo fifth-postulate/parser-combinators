@@ -1,0 +1,2 @@
+# Mediography
+There are a lot of resources on the internet about parser combinators. We have a curated list of resources on the [wiki page](https://github.com/fifth-postulate/parser-combinators/wiki/Mediography) accompanying this workshop.
