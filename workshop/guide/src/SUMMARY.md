@@ -5,6 +5,7 @@
 # Preliminaries
 * [Languages](./prelimenaries/languages.md) 
 * [EBNF]()
+* [Types and Styles](./prelimenaries/types.md)
 
 # Workshop
 
