@@ -56,12 +56,12 @@ In order to clearly express our thoughts we introduce types. There is a concrete
 string -> [(integer,string)]
 ```
 
+2. The function that counts the occurences of a certain character in a string could be denoted by `(string, character) -> integer`. A different view of this function is would be `string -> character -> integer`. This can be read as a function that accepts as argument a value of type `string` and returns a function of type `character -> integer`.
 
+The process is called [_Currying_][wikipedia:currying] after the computer scientist Haskell Curry.
 
-
-
-
-
+What is the type of the curried function type `(S, T) -> U`?
 
 [wikipedia:type-system]: https://en.wikipedia.org/wiki/Type_system
+[wikipedia:currying]: https://en.wikipedia.org/wiki/Currying
 [book:tapl]: https://www.cis.upenn.edu/~bcpierce/tapl/
