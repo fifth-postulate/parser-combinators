@@ -11,7 +11,8 @@ For example. *character* is a parser that accepts a character as argument and re
 |-------|------|--------------------------------|
 | "ABC" | 'A'  | [("A", "BC")]                  |
 | "BC"  | 'A'  | []                             |
-| "aBC" | 'A'  | [("a", "BC")]                  |
+| "aBC" | 'A'  | []                             |
+| "aBC" | 'a'  | [("a", "BC")]                  |
 
 ## Implementation
 
@@ -22,3 +23,7 @@ character(char) =
              else
                 []
 ```
+
+## Exercises
+1. Implement the `character` parser.
+2. Implement `parserA` in terms of `character`.

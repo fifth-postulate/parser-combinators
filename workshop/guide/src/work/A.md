@@ -18,3 +18,6 @@ parserA() =
              else
                 []
 ```
+
+## Exercises
+1. Implement `parserA` in your favorite language. You will have to choice how to represent functions.
