@@ -15,7 +15,7 @@ Not every programming language uses types, and the programming languages that do
 In order to fascilitate the discussion we will introduce a type notation. This is a description of a certain type.
 
 ## Notation
-In order get start the discussion we need to be able to express certain base types. Since we are talking a lot about languages, which are just a collection of _string_s we are going to include those in are notation.
+In order get start the discussion we need to be able to express certain base types. Since we are talking a lot about languages, which are just a collection of *string*s we are going to include those in are notation.
 
 ### Base
 The notation for base types include `string`, `integer`, `boolean` etcetera. These will form building blocks for more complex types. The are written with all lower-case letters.
