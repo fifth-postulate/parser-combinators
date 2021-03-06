@@ -12,6 +12,7 @@
 # Workshop
 * [Parse an `'A'`](./work/A.md)
 * [Parse any character](./work/character.md)
+* [Parse this and then that](./work/andThen.md)
 
 # Appendices
 * [Sources](./appendix/sources.md)
