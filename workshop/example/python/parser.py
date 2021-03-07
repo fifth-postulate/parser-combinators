@@ -5,6 +5,9 @@ class Parser:
     def andThen(self, *others):
         return Consecutive([self] + list(others))
 
+    def map(self, transform):
+        return Map(transform, self)
+
 class Character(Parser):
     def __init__(self, target):
         self.target = target
@@ -14,7 +17,7 @@ class Character(Parser):
             return [(str(self.target), input[1:])]
         else:
             return []
-    assert A.or(B).parse('ABC') == [('A', 'BC')]
+
 def character(target):
     return Character(target)
 
@@ -37,6 +40,15 @@ def parse_with(parsers, input):
         return [([], input)]
     else:
         return [([r1] + results, remaining) for (r1, intermediate) in parsers[0].parse(input) for (results, remaining) in parse_with(parsers[1:], intermediate)]
+
+class Map(Parser):
+    def __init__(self, transform, parser):
+        self.transform = transform
+        self.parser = parser
+
+    def parse(self, input):
+        return [(self.transform(result), remaining) for (result, remaining) in self.parser.parse(input)]
+
 if __name__ == '__main__':
     assert character('A').parse('ABC') == [('A', 'BC')]
     assert character('A').parse('BC') == []
@@ -55,3 +67,8 @@ if __name__ == '__main__':
     assert A.orElse(B).parse('ABC') == [('A', 'BC')]
     assert A.orElse(B).parse('BAC') == [('B', 'AC')]
     assert A.orElse(B, C).parse('CAB') == [('C', 'AB')]
+
+    transform = lambda c : ord(c)
+
+    assert A.map(transform).parse('ABC') == [(65, 'BC')]
+    assert A.map(transform).parse('aBC') == []
