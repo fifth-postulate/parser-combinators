@@ -1,4 +1,4 @@
-from parser import Consecutive, character, lazy, epsilon, just
+from parser import Consecutive, character, lazy, epsilon, just, succeed
 
 class Tree:
     pass
@@ -8,7 +8,7 @@ class Nil(Tree):
         return isinstance(other, Nil)
     
     def __repr__(self):
-        return 'Nil'
+        return 'Nil()'
 
 class Bin(Tree):
     def __init__(self, first, second):
@@ -21,16 +21,28 @@ class Bin(Tree):
     def __repr__(self):
         return f'Bin({self.first},{self.second})'
 
-def parens():
-    return Consecutive([
+def foldparens(combine, initial):
+    parser = Consecutive([
         character('('),
-        lazy(parens),
+        lazy(lambda : parser),
         character(')'),
-        lazy(parens)
-    ]).map(lambda result: Bin(result[1], result[3])).orElse(epsilon().map(lambda _: Nil()))
+        lazy(lambda : parser)
+    ]).map(combine).orElse(succeed(initial))
+    return parser
+
+
+def parens():
+    return foldparens(lambda result: Bin(result[1], result[3]), Nil())
+
+def nesting():
+    return foldparens(lambda result: max(1 + result[1], result[3]), 0)
 
 if __name__ == '__main__':
     assert Nil() == Nil()
     assert Bin(Nil(), Bin(Nil(), Nil())) == Bin(Nil(), Bin(Nil(), Nil()))
-    result = just(parens())('()(())')
-    print(result)
+    assert just(parens())('()(())') == [(Bin(Nil(),Bin(Bin(Nil(),Nil()),Nil())), '')]
+
+    depth = just(nesting())
+    assert depth('') == [(0, '')]
+    assert depth('()') == [(1, '')]
+    assert depth('()(())') == [(2, '')]
