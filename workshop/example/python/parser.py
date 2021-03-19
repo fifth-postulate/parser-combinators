@@ -8,6 +8,12 @@ class Parser:
     def map(self, transform):
         return Map(transform, self)
 
+    def parse(self, input):
+        raise NotImplementedError()
+
+    def __call__(self, input):
+        return self.parse(input)    
+
 class Character(Parser):
     def __init__(self, target):
         self.target = target
@@ -47,6 +53,13 @@ def satisfy(predicate):
 def character(target):
     return satisfy(lambda c: c == target)
 
+class Epsilon(Parser):
+    def parse(self, input):
+        return [((), input)]
+
+def epsilon():
+    return Epsilon()
+
 class OneOf(Parser):
     def __init__(self, parsers):
         self.parsers = parsers
@@ -76,28 +89,30 @@ class Map(Parser):
         return [(self.transform(result), remaining) for (result, remaining) in self.parser.parse(input)]
 
 if __name__ == '__main__':
-    assert character('A').parse('ABC') == [('A', 'BC')]
-    assert character('A').parse('BC') == []
-    assert character('A').parse('aBC') == []
-    assert character('a').parse('aBC') == [('a', 'BC')]
+    assert character('A')('ABC') == [('A', 'BC')]
+    assert character('A')('BC') == []
+    assert character('A')('aBC') == []
+    assert character('a')('aBC') == [('a', 'BC')]
 
-    assert token('begin').parse('begin') == [('begin', '')]
-    assert token('begin').parse('end') == []
+    assert token('begin')('begin') == [('begin', '')]
+    assert token('begin')('end') == []
+
+    assert epsilon()('Hello, World!') == [((), 'Hello, World!')]
 
     A = character('A')
     B = character('B')
     C = character('C')
 
-    assert A.andThen(B).parse('ABC') == [(['A', 'B'], 'C')]
-    assert A.andThen(B).parse('ABCD') == [(['A', 'B'], 'CD')]
-    assert A.andThen(B).parse('aBC') == []
-    assert A.andThen(B, C).parse('ABC') == [(['A', 'B', 'C'], '')]
+    assert A.andThen(B)('ABC') == [(['A', 'B'], 'C')]
+    assert A.andThen(B)('ABCD') == [(['A', 'B'], 'CD')]
+    assert A.andThen(B)('aBC') == []
+    assert A.andThen(B, C)('ABC') == [(['A', 'B', 'C'], '')]
 
-    assert A.orElse(B).parse('ABC') == [('A', 'BC')]
-    assert A.orElse(B).parse('BAC') == [('B', 'AC')]
-    assert A.orElse(B, C).parse('CAB') == [('C', 'AB')]
+    assert A.orElse(B)('ABC') == [('A', 'BC')]
+    assert A.orElse(B)('BAC') == [('B', 'AC')]
+    assert A.orElse(B, C)('CAB') == [('C', 'AB')]
 
     transform = lambda c : ord(c)
 
-    assert A.map(transform).parse('ABC') == [(65, 'BC')]
-    assert A.map(transform).parse('aBC') == []
+    assert A.map(transform)('ABC') == [(65, 'BC')]
+    assert A.map(transform)('aBC') == []
