@@ -53,12 +53,14 @@ def satisfy(predicate):
 def character(target):
     return satisfy(lambda c: c == target)
 
-class Epsilon(Parser):
-    def parse(self, input):
-        return [((), input)]
+def succeed(result):
+    return lambda input: [(result, input)]
 
 def epsilon():
-    return Epsilon()
+    return succeed(())
+
+def fail():
+    return lambda input: []
 
 class OneOf(Parser):
     def __init__(self, parsers):
@@ -98,6 +100,8 @@ if __name__ == '__main__':
     assert token('begin')('end') == []
 
     assert epsilon()('Hello, World!') == [((), 'Hello, World!')]
+    assert succeed(37)('Hello, World!') == [(37, 'Hello, World!')]
+    assert fail()('Hello, World!') == []
 
     A = character('A')
     B = character('B')
