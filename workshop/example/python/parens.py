@@ -32,5 +32,5 @@ def parens():
 if __name__ == '__main__':
     assert Nil() == Nil()
     assert Bin(Nil(), Bin(Nil(), Nil())) == Bin(Nil(), Bin(Nil(), Nil()))
-    result = parens()('()(())')
+    result = just(parens())('()(())')
     print(result)
