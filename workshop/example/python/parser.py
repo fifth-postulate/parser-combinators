@@ -96,6 +96,17 @@ class Map(Parser):
     def parse(self, input):
         return [(self.transform(result), remaining) for (result, remaining) in self.parser.parse(input)]
 
+class Lazy(Parser):
+    def __init__(self, producer):
+        self.producer = producer
+    
+    def parse(self, input):
+        parser = self.producer()
+        return parser(input)
+
+def lazy(producer):
+    return Lazy(producer)
+
 if __name__ == '__main__':
     assert character('A')('ABC') == [('A', 'BC')]
     assert character('A')('BC') == []
@@ -130,3 +141,5 @@ if __name__ == '__main__':
 
     assert A.map(transform)('ABC') == [(65, 'BC')]
     assert A.map(transform)('aBC') == []
+
+    assert lazy(lambda : A)('ABC') == [('A', 'BC')]
