@@ -131,6 +131,20 @@ def many(p):
 def many1(p):
     return Consecutive([p,many(p)]).map(lambda result: [result[0]] + result[1])
 
+class First(Parser):
+    def __init__(self, parser):
+        self.parser = parser
+    
+    def parse(self, input):
+        results = self.parser(input)
+        if len(results) > 0:
+            return [results[0]]
+        else:
+            return []
+
+def first(parser):
+    return First(parser)
+
 if __name__ == '__main__':
     assert character('A')('ABC') == [('A', 'BC')]
     assert character('A')('BC') == []
@@ -168,5 +182,7 @@ if __name__ == '__main__':
 
     assert lazy(lambda : A)('ABC') == [('A', 'BC')]
 
-    assert many(A)('AAAB') == [(['A', 'A', 'A'],'B'), (['A', 'A'],'AB'), (['A'],'AAB'), ([],'AAAB')]
-    assert many1(A)('AAAB') == [(['A', 'A', 'A'],'B'), (['A', 'A'],'AB'), (['A'],'AAB')]
+    assert many(A)('AAAB') == [(['A', 'A', 'A'], 'B'), (['A', 'A'], 'AB'), (['A'], 'AAB'), ([], 'AAAB')]
+    assert many1(A)('AAAB') == [(['A', 'A', 'A'], 'B'), (['A', 'A'], 'AB'), (['A'], 'AAB')]
+
+    assert first(many(A))('AAAB') == [(['A', 'A', 'A'], 'B')]
