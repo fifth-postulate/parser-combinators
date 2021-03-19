@@ -122,6 +122,15 @@ class Lazy(Parser):
 def lazy(producer):
     return Lazy(producer)
 
+def many(p):
+    return Consecutive([
+        p,
+        lazy(lambda : many(p))
+    ]).map(lambda result: [result[0]] + result[1]).orElse(succeed([]))
+
+def many1(p):
+    return Consecutive([p,many(p)]).map(lambda result: [result[0]] + result[1])
+
 if __name__ == '__main__':
     assert character('A')('ABC') == [('A', 'BC')]
     assert character('A')('BC') == []
@@ -158,3 +167,6 @@ if __name__ == '__main__':
     assert A.map(transform)('aBC') == []
 
     assert lazy(lambda : A)('ABC') == [('A', 'BC')]
+
+    assert many(A)('AAAB') == [(['A', 'A', 'A'],'B'), (['A', 'A'],'AB'), (['A'],'AAB'), ([],'AAAB')]
+    assert many1(A)('AAAB') == [(['A', 'A', 'A'],'B'), (['A', 'A'],'AB'), (['A'],'AAB')]
