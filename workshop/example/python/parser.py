@@ -14,16 +14,6 @@ class Parser:
     def __call__(self, input):
         return self.parse(input)    
 
-class Character(Parser):
-    def __init__(self, target):
-        self.target = target
-    
-    def parse(self, input):
-        if input[0] == self.target:
-            return [(str(self.target), input[1:])]
-        else:
-            return []
-
 class Token(Parser):
     def __init__(self, target):
         self.target = target
@@ -42,7 +32,7 @@ class Predicate(Parser):
        self.predicate = predicate
 
     def parse(self, input):
-        if self.predicate(input[0]):
+        if len(input) > 0 and self.predicate(input[0]):
             return [(str(input[0]), input[1:])]
         else:
             return []
@@ -53,14 +43,25 @@ def satisfy(predicate):
 def character(target):
     return satisfy(lambda c: c == target)
 
+class Succeed(Parser):
+    def __init__(self, result):
+        self.result = result
+
+    def parse(self, input):
+        return [(self.result, input)]
+
 def succeed(result):
-    return lambda input: [(result, input)]
+    return Succeed(result) 
 
 def epsilon():
     return succeed(())
 
+class Fail(Parser):
+    def parse(self, input):
+        return []
+
 def fail():
-    return lambda input: []
+    return Fail() 
 
 class OneOf(Parser):
     def __init__(self, parsers):
@@ -82,11 +83,25 @@ def parse_with(parsers, input):
     else:
         return [([r1] + results, remaining) for (r1, intermediate) in parsers[0].parse(input) for (results, remaining) in parse_with(parsers[1:], intermediate)]
 
+class Sp(Parser):
+    def __init__(self, parser):
+        self.parser = parser
+    
+    def parse(self, input):
+        return self.parser(input.lstrip())
+
 def sp(parser):
-    return lambda input: parser(input.lstrip())
+    return Sp(parser)
+
+class Just(Parser):
+    def __init__(self, parser):
+        self.parser = parser
+
+    def parse(self, input):
+        return [(result, remaining) for (result, remaining) in self.parser(input) if remaining == '']
 
 def just(parser):
-    return lambda input: [(result, remaining) for (result, remaining) in parser(input) if remaining == '']
+    return Just(parser)
 
 class Map(Parser):
     def __init__(self, transform, parser):
