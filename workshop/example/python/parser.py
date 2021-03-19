@@ -18,9 +18,6 @@ class Character(Parser):
         else:
             return []
 
-def character(target):
-    return Character(target)
-
 class Token(Parser):
     def __init__(self, target):
         self.target = target
@@ -33,6 +30,22 @@ class Token(Parser):
 
 def token(target):
     return Token(target)
+
+class Predicate(Parser):
+    def __init__(self, predicate):
+       self.predicate = predicate
+
+    def parse(self, input):
+        if self.predicate(input[0]):
+            return [(str(input[0]), input[1:])]
+        else:
+            return []
+
+def satisfy(predicate):
+    return Predicate(predicate)
+
+def character(target):
+    return satisfy(lambda c: c == target)
 
 class OneOf(Parser):
     def __init__(self, parsers):
