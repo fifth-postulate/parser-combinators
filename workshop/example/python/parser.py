@@ -82,6 +82,12 @@ def parse_with(parsers, input):
     else:
         return [([r1] + results, remaining) for (r1, intermediate) in parsers[0].parse(input) for (results, remaining) in parse_with(parsers[1:], intermediate)]
 
+def sp(parser):
+    return lambda input: parser(input.lstrip())
+
+def just(parser):
+    return lambda input: [(result, remaining) for (result, remaining) in parser(input) if remaining == '']
+
 class Map(Parser):
     def __init__(self, transform, parser):
         self.transform = transform
@@ -115,6 +121,10 @@ if __name__ == '__main__':
     assert A.orElse(B)('ABC') == [('A', 'BC')]
     assert A.orElse(B)('BAC') == [('B', 'AC')]
     assert A.orElse(B, C)('CAB') == [('C', 'AB')]
+
+    assert sp(A)('     ABC') == [('A', 'BC')]
+    assert just(A)('A') == [('A', '')]
+    assert just(A)('AB') == []
 
     transform = lambda c : ord(c)
 
