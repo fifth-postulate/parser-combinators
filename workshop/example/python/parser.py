@@ -145,6 +145,12 @@ class First(Parser):
 def first(parser):
     return First(parser)
 
+def greedy(parser):
+    return first(many(parser))
+
+def greedy1(parser):
+    return first(many1(parser))
+
 if __name__ == '__main__':
     assert character('A')('ABC') == [('A', 'BC')]
     assert character('A')('BC') == []
@@ -186,3 +192,5 @@ if __name__ == '__main__':
     assert many1(A)('AAAB') == [(['A', 'A', 'A'], 'B'), (['A', 'A'], 'AB'), (['A'], 'AAB')]
 
     assert first(many(A))('AAAB') == [(['A', 'A', 'A'], 'B')]
+    assert greedy(A)('AAAB') == [(['A', 'A', 'A'], 'B')]
+    assert greedy1(A)('B') == []
