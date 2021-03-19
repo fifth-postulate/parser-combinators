@@ -21,6 +21,19 @@ class Character(Parser):
 def character(target):
     return Character(target)
 
+class Token(Parser):
+    def __init__(self, target):
+        self.target = target
+    
+    def parse(self, input):
+        if input.startswith(self.target):
+            return [(str(self.target), input[len(self.target):])]
+        else:
+            return []
+
+def token(target):
+    return Token(target)
+
 class OneOf(Parser):
     def __init__(self, parsers):
         self.parsers = parsers
@@ -54,6 +67,9 @@ if __name__ == '__main__':
     assert character('A').parse('BC') == []
     assert character('A').parse('aBC') == []
     assert character('a').parse('aBC') == [('a', 'BC')]
+
+    assert token('begin').parse('begin') == [('begin', '')]
+    assert token('begin').parse('end') == []
 
     A = character('A')
     B = character('B')
