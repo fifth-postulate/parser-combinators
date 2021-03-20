@@ -10,6 +10,7 @@
 * [What is a Parser](./prelimenaries/parser.md)
 
 # Workshop
+## Basis
 * [Parse an `'A'`](./work/A.md)
 * [Parse any character](./work/character.md)
 * [Parse a token](./work/token.md)
@@ -20,6 +21,10 @@
 * [Just all](./work/just.md)
 * [Transform a result](./work/map.md)
 * [Being lazy](./work/lazy.md)
+## Higher order
+* [Parse many things](./work/many.md)
+* [Commit to the first result](./work/first.md)
+* [Greedy parsing](./work/greedy.md)
 
 # Projects
 * [Balanced parenthesis](./project/parens.md)
