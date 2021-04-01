@@ -151,6 +151,13 @@ def greedy(parser):
 def greedy1(parser):
     return first(many1(parser))
 
+def pack(opening, parser, closing):
+    return Consecutive([
+        opening,
+        parser,
+        closing
+    ]).map(lambda result: result[1])
+
 if __name__ == '__main__':
     assert character('A')('ABC') == [('A', 'BC')]
     assert character('A')('BC') == []

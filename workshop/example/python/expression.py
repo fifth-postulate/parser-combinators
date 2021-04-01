@@ -1,4 +1,4 @@
-from parser import Consecutive, OneOf, character, first, lazy, many1, satisfy, succeed
+from parser import Consecutive, OneOf, character, first, lazy, many1, pack, satisfy, succeed
 
 def expression():
     return first(OneOf([
@@ -41,13 +41,6 @@ def factor():
 
 def parenthesized(parser):
     return pack(character('('), parser, character(')'))
-
-def pack(opening, parser, closing):
-    return Consecutive([
-        opening,
-        parser,
-        closing
-    ]).map(lambda result: result[1])
 
 def integer():
     return first(many1(digit())).map(lambda result: Constant(int(''.join(result))))
