@@ -11,11 +11,11 @@
 
 # Workshop
 ## Basis
+* [Succeed and friends](./work/succeed.md)
 * [Parse an `'A'`](./work/A.md)
 * [Parse any character](./work/character.md)
 * [Parse a token](./work/token.md)
 * [Parse a predicate](./work/predicate.md)
-* [Succeed and friends](./work/succeed.md)
 * [Parse this or that](./work/orThat.md)
 * [Parse this and that](./work/andThen.md)
 * [Just all](./work/just.md)
