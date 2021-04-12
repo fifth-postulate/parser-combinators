@@ -1,5 +1,5 @@
 # Any character
-The work we have done for the parsing a character `'A'`, could also be done for other charcters.
+The work we have done for the parsing a character `'A'`, could also be done for other characters.
 
 One could copy the implementation of *parserA* and change it into a *parserB*, a *parserC* or a *parser^* for that matter.
 
