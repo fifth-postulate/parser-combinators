@@ -29,6 +29,7 @@
 # Projects
 * [Balanced parenthesis](./project/parens.md)
 * [Aritmetic Expression](./project/expression.md)
+* [Template Language](./project/template.md)
 
 # Appendices
 * [Sources](./appendix/sources.md)
