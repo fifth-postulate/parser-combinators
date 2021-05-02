@@ -4,7 +4,7 @@
 
 # Preliminaries
 * [Languages](./prelimenaries/languages.md) 
-* [EBNF](./prelimenaries/ebnf.md)
+* [Grammars and EBNF](./prelimenaries/ebnf.md)
 * [Types](./prelimenaries/types.md)
 * [Style](./prelimenaries/style.md)
 * [What is a Parser](./prelimenaries/parser.md)
