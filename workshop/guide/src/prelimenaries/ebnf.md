@@ -3,10 +3,10 @@
 Before diving in EBNF (Extended Backus-Naur Form), we need to have a simple understanding on grammars.
 
 ## Grammars
-A grammar is a set of rules a language adheres to. Every language has a grammar, natural languages (e.g. Dutch or
-English) but also computer languages (Java, Haskell, etc.). The rules for computer languages are stricter than the
-rules for natural languages. In general computer languages don't allow for ambiguities whereas natural languages are
-filled with ambiguities.
+A grammar is a set of rules a language adheres to. Commonly languages can be described by grammars, natural languages
+(e.g. Dutch or English) but also computer languages (Java, Haskell, etc.). The rules for computer languages are
+stricter than the rules for natural languages. In general computer languages don't allow for ambiguities whereas
+natural languages are filled with ambiguities.
 
 A grammar for a computer language (from now on just _language_) is normally described using EBNF.
 
@@ -16,8 +16,8 @@ EBNF (_Extended Backus-Naur Form_) is a way to describe a grammar. For example:
 ```
 non zero digit ::= "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
 digit ::= "0" | non zero digit ;
-natural number ::= non zero digit digit*
-integer = "0" | "-"? natural number ;
+natural number ::= non zero digit digit* ;
+integer ::= "0" | "-"? natural number ;
 ```
 
 This can be interpreted as follows.
