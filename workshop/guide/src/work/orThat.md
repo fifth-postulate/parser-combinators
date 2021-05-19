@@ -5,7 +5,7 @@ Sometimes we have an option. Either we want to parse a number, or we want to par
 
 Assuming we have parsers `A = character('A')` and `B = character('B')`, below you find a table of our expectations for the `oneOf` combinator.
 
-| input | oneOf(A, B)   |
+| input | *oneOf(A, B)* |
 |-------|---------------|
 | "ABC" | [("A", "BC")] |
 | "BAC" | [("B", "AC")] |
