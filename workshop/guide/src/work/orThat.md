@@ -5,11 +5,11 @@ Sometimes we have an option. Either we want to parse a number, or we want to par
 
 Assuming we have parsers `A = character('A')` and `B = character('B')`, below you find a table of our expectations for the `oneOf` combinator.
 
-| input | oneOf(A, B).parse(input) |
-|-------|--------------------------|
-| "ABC" | [("A", "BC")]            |
-| "BAC" | [("B", "AC")]            |
-| "aBC" | []                       |
+| input | oneOf(A, B)   |
+|-------|---------------|
+| "ABC" | [("A", "BC")] |
+| "BAC" | [("B", "AC")] |
+| "aBC" | []            |
 
 ## Signature
 Remember, the type of a parser is `string -> [(T, string)]` where `T` is a type variable representing the structure that is returned for this parser.
@@ -40,7 +40,7 @@ When we think about an implementation of `oneOf` we need to consider the two par
 
 ```
 oneOf(A, B) =
-    input => A(input).concat(B(input))                []
+    input => A(input).concat(B(input))
 ```
 
 ## Exercises
