@@ -57,6 +57,6 @@ We will not concentrate on error reporting in this workshop. There are some hint
 
 ## Exercises
 1. What is the smallest base in which `"teapot"` could be a description of a valid integer? Assume that 'a' corresponds with 10, 'b' with 11 etcetera.
-2. If your language of choice does not support first class functions, how could you remedy that? Discuss your ideas with a participant of the guides.
+2. If your language of choice does not support first class functions, how could you remedy that? Discuss your ideas with a participant or the guides.
 3. How would you model the success and failure states of a parser?
 4. How would you enrich the return type to fascilitate error reporting?
