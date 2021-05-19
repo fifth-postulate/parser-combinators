@@ -29,7 +29,7 @@ Functions are important and we will want to discuss them and their types. For ex
 In general if we have types `S` and `T`, a functions that maps values of type `S` into values of type `T` is denoted by `S -> T`.
 
 ### Pair
-We sometimes want to combine to pieces of information. For example, you could keep track of your age. At the moment that would be `("daan", 40)`. Notice that the first part is a value of type `string`. The second part is a value of type `integer`. The pair has type `(string, integer)`.
+We sometimes want to combine to pieces of information. For example, you could keep track of your age. At the moment that would be `("daan", 41)`. Notice that the first part is a value of type `string`. The second part is a value of type `integer`. The pair has type `(string, integer)`.
 
 For types `S` and `T`, the type of a pair of these values is denoted by `(S, T)`.
 

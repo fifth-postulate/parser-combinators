@@ -22,9 +22,9 @@ For this to make sense we have to understand our overal goal. What we would like
 Keeping track of the which part of the input is consumed is tedious, especially if it has to be done anew for each parser we create.
 
 ### Second thought
-An other option is to not only return the structure, but also the part of the input that is unprocessed. For example, say that we an have an input that represents a tuple of a age and an name. I.e. `"40 daan"`. We could use our parser that parses an integer for the age part. If it would only return the integer, it would not be easy to combine other parsers.
+An other option is to not only return the structure, but also the part of the input that is unprocessed. For example, say that we an have an input that represents a tuple of a age and an name. I.e. `"41 daan"`. We could use our parser that parses an integer for the age part. If it would only return the integer, it would not be easy to combine other parsers.
 
-Instead if the integer parser would return `[(40, " daan")]`, other parser could pick up where the integer parser left off.
+Instead if the integer parser would return `[(41, " daan")]`, other parser could pick up where the integer parser left off.
 
 ### Final Form
 So the final form of our parser is as follows. It is a function that accepts a `string` and returns a list of pairs. The first component of the pair is the structure that the parser has parsed, the second component of the pair is the remaining part of the input.
