@@ -28,7 +28,7 @@ Below you can find some examples of how we would use succeed
 |------------|--------------------|
 | "whatever" | [(37, "whatever")] |
 | "input"    | [(37, "input")]    |
-| "ABC"      | [(37, "ABC)]       |
+| "ABC"      | [(37, "ABC")]      |
 
 
 With succeed under our belt, we can go on to an other simple parser. One could argue that it is even simpler then `succeed`.
