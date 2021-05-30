@@ -10,7 +10,6 @@
 * [What is a Parser](./prelimenaries/parser.md)
 
 # Workshop
-## Basis
 * [Succeed and friends](./work/succeed.md)
 * [Parse an `'A'`](./work/A.md)
 * [Parse any character](./work/character.md)
@@ -21,10 +20,12 @@
 * [Just all](./work/just.md)
 * [Transform a result](./work/map.md)
 * [Being lazy](./work/lazy.md)
-## Higher order
 * [Parse many things](./work/many.md)
-* [Commit to the first result](./work/first.md)
-* [Greedy parsing](./work/greedy.md)
+
+# Utilities
+* [It does not end here](./utilities/why.md)
+* [Commit to the first result](./utilities/first.md)
+* [Greedy parsing](./utilities/greedy.md)
 
 # Projects
 * [Balanced parenthesis](./project/parens.md)
