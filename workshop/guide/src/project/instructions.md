@@ -11,3 +11,4 @@ This section of the workshop presents to you various projects to solidify your u
 All these steps and variants have real world counterparts. The most important one is step 1, what the structure do you want to work with. All steps follow from that.
 
 Because this is a workshop focusses on parser combinators, the realm that makes step 4 possible, the projects in this sections are providing steps 1 and 3 for you. You are still asked to implement the structures that you are going to work with, but that is mainly because you are free to choose your favorite programming language.
+
