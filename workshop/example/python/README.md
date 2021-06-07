@@ -2,7 +2,7 @@
 Here you find python examples accompanying the _Practical Parsing for Pragmatic Programmers_ workshop.
 
 ## Choices
-In this project a parser is an object with a `parse` method.
+In this project a parser is an object with a `parse` method, that accepts self and the input to parse.
 
 ## Development
 You could create a virtual environment for this workshop by using the following command
