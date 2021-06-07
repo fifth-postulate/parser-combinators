@@ -1,0 +1,17 @@
+{
+  "name": "parser_combinator",
+  "version": "1.0.0",
+  "description": "A parser combinator frame work",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "parser"
+  ],
+  "authors": [
+    "Geert Mulders",
+    "Daan van Berkel"
+  ],
+  "license": "MIT"
+}
