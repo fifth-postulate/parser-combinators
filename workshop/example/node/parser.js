@@ -91,20 +91,6 @@ many1 = module.exports.many1 = function many1(p) {
         })
 }
 
-function first(p) {
-    return function(input){
-        return p(input).slice(0, 1)
-    }
-}
-
-function greedy(p) {
-    return first(many(p))
-}
-
-function greedy1(p) {
-    return first(many1(p))
-}
-
 assert.deepEqual(succeed(37)("Hello, World!"), [[37, "Hello, World!"]])
 assert.deepEqual(fail()("Hello, World!"), [])
 
@@ -140,7 +126,3 @@ assert.deepEqual(lazy(function(){return A})("ABC"), [['A', "BC"]])
 
 assert.deepEqual(many(A)("AAAB"), [[['A', 'A', 'A'], "B"], [['A', 'A'], "AB"], [['A'], "AAB"], [[], "AAAB"]])
 assert.deepEqual(many1(A)("AAAB"), [[['A', 'A', 'A'], "B"], [['A', 'A'], "AB"], [['A'], "AAB"]])
-
-assert.deepEqual(first(many(A))("AAAB"), [[['A', 'A', 'A'], "B"]])
-assert.deepEqual(greedy(A)("AAAB"), [[['A', 'A', 'A'], "B"]])
-assert.deepEqual(greedy1(A)("B"), [])
