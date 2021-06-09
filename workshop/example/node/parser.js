@@ -1,18 +1,18 @@
 const assert = require('assert').strict;
 
-function fail() {
+fail = module.exports.fail = function fail() {
     return function(_) {
         return []
     }
 }
 
-function succeed(value) {
+succeed = module.exports.succeed = function succeed(value) {
     return function(input) {
         return [[value, input]]
     }
 }
 
-function satisfy(predicate) {
+satisfy = module.exports.satisfy = function satisfy(predicate) {
     return function(input) {
         if (input.length > 0 && predicate(input[0])) {
             return [[input[0], input.slice(1)]]
@@ -22,11 +22,11 @@ function satisfy(predicate) {
     }
 }
 
-function character(target) {
+character = module.exports.character = function character(target) {
     return satisfy(function(character) { return character == target })
 }
 
-function token(target) {
+token = module.exports.token = function token(target) {
     return function(input) {
         if (input.startsWith(target)) {
             return [[target, input.slice(target.length)]]
@@ -36,13 +36,13 @@ function token(target) {
     }
 }
 
-function or(p, q) {
+or = module.exports.or = function or(p, q) {
     return function(input) {
         return p(input).concat(q(input))
     }
 }
 
-function and(p, q) {
+and = module.exports.and = function and(p, q) {
     return function(input) {
         var result = []
         p(input).forEach(function(first){
@@ -54,7 +54,7 @@ function and(p, q) {
     }
 }
 
-function just(p) {
+just = module.exports.just = function just(p) {
     return function(input) {
         return p(input).filter(function(result){
             return result[1] === ""
@@ -62,7 +62,7 @@ function just(p) {
     }
 }
 
-function map(p, transform) {
+map = module.exports.map = function map(p, transform) {
     return function(input) {
         return p(input).map(function(result){
             return [transform(result[0]), result[1]]
@@ -70,13 +70,13 @@ function map(p, transform) {
     }
 }
 
-function lazy(promise) {
+lazy = module.exports.lazy = function lazy(promise) {
     return function(input) {
         return promise()(input)
     }
 }
 
-function many(p) {
+many = module.exports.many = function many(p) {
     return or(
             map(and(p, lazy(function(){ return many(p) })), function(result){
                 return [result[0]].concat(result[1])
@@ -84,7 +84,7 @@ function many(p) {
             succeed([]))
 }
 
-function many1(p) {
+many1 = module.exports.many1 = function many1(p) {
     return map(and(p, many(p)),
         function(result){
             return [result[0]].concat(result[1])
