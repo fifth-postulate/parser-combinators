@@ -31,8 +31,8 @@
 # Projects
 * [How to use it](./project/instructions.md)
 * [Balanced parenthesis](./project/parens.md)
-* [Aritmetic Expression](./project/expression.md)
 * [Template Language](./project/template.md)
+* [Aritmetic Expression](./project/expression.md)
 
 # Appendices
 * [Sources](./appendix/sources.md)
