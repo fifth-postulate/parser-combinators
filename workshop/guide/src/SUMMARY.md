@@ -26,6 +26,7 @@
 * [It does not end here](./utilities/why.md)
 * [Commit to the first result](./utilities/first.md)
 * [Greedy parsing](./utilities/greedy.md)
+* [Consecutive parsers](./utilities/consecutive.md)
 
 # Projects
 * [How to use it](./project/instructions.md)
