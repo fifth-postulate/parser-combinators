@@ -27,6 +27,8 @@
 * [Commit to the first result](./utilities/first.md)
 * [Greedy parsing](./utilities/greedy.md)
 * [Consecutive parsers](./utilities/consecutive.md)
+* [Oneof the following parsers](./utilities/oneof.md)
+* [Packing parser](./utilities/pack.md)
 
 # Projects
 * [How to use it](./project/instructions.md)
