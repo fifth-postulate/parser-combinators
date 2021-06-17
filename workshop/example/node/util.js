@@ -40,6 +40,10 @@ pack = module.exports.pack = function pack(left, content, right) {
     )
 }
 
+parenthesized = module.exports.parenthesized = function parenthesized(parser) {
+    return this.pack(Parser.character('('), parser, Parser.character(')'))
+}
+
 A = Parser.character('A')
 B = Parser.character('B')
 C = Parser.character('C')
@@ -54,3 +58,5 @@ assert.deepEqual(oneOf([A, B])("ABC"), [['A', "BC"]])
 assert.deepEqual(oneOf([A, B])("BAC"), [['B', "AC"]])
 
 assert.deepEqual(pack(A, B, C)("ABCD"), [['B', "D"]])
+
+assert.deepEqual(parenthesized(A)("(A)BC"), [['A', "BC"]])
