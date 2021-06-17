@@ -14,7 +14,7 @@ def literal():
 
 def escapedCharacter():
     return OneOf([
-        token('\\').map(lambda _: '\\'),
+        token('\\\\').map(lambda _: '\\'),
         token('\\{').map(lambda _: '{'),
     ])
 
