@@ -29,6 +29,7 @@
 * [Greedy parsing](./utilities/greedy.md)
 * [Consecutive parsers](./utilities/consecutive.md)
 * [Oneof the following parsers](./utilities/oneof.md)
+* [Whitespace](./utilities/whitespace.md)
 * [Packing parser](./utilities/pack.md)
 
 # Projects
