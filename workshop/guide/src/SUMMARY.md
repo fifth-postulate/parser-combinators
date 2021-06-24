@@ -31,6 +31,7 @@
 * [Oneof the following parsers](./utilities/oneof.md)
 * [Whitespace](./utilities/whitespace.md)
 * [Packing parser](./utilities/pack.md)
+* [Separating parser](./utilities/separating.md)
 
 # Projects
 * [How to use it](./project/instructions.md)
