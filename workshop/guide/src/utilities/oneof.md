@@ -9,5 +9,5 @@ Just like the case for the `and` parser combinator, the `or` parser combinator o
 * a ternary expression
 
 ## Exercises
-1. What is the signature of the `oneOf` parser combinator.
+1. What is the signature of the `oneOf` parser combinator?
 2. Implement the `oneOf` parser combinator.

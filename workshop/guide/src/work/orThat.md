@@ -1,5 +1,5 @@
 # Parse this or that
-With a basic parser under our belt, we start looking at a combinator. A combinator is a function that *combines* simpler things into a more complex thing.
+With a basic parser under our belt, we can start looking at a combinator. A combinator is a function that *combines* simpler things into a more complex thing.
 
 Sometimes we have an option. Either we want to parse a number, or we want to parse a variable name. If we have simpler parsers that parse a number and another that parse a variable name, we can combine them into a more complex that could parse either of the two.
 

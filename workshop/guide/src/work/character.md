@@ -5,7 +5,7 @@ One could copy the implementation of *parserA* and change it into a *parserB*, a
 
 Instead we will define a *character* parser that accepts the character to parse as an argument.
 
-For example. *character* is a parser that accepts a character as argument and returns a parser that succeeds if the input starts with that character. Below we summarize our expectation for *character*.
+For example *character* is a parser that accepts a character as argument and returns a parser that succeeds if the input starts with that character. Below we summarize our expectation for *character*.
 
 | input | char | *character(char)* |
 |-------|------|-------------------|
@@ -27,6 +27,6 @@ character(char) =
 ```
 
 ## Exercises
-1. What is the type of the `character` parser.
+1. What is the type of the `character` parser?
 1. Implement the `character` parser.
 2. Implement `parserA` in terms of `character`. This is a common practice in this workshop. When you notice a common pattern in parsers, generalize it.

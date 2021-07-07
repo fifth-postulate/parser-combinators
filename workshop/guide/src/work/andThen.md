@@ -12,7 +12,7 @@ Let's assume again that we have parser `A = character('A')` and `B = character('
 Note that when the parser accepts its input, it returns a pair as a result. In our example it is a pair of characters, but it depends on the parser that we are combining.
 
 ## Exercises
-1. What is the type of the `andThen` parser.
+1. What is the type of the `andThen` parser?
 2. Create the `andThen` parser
 3. If you wanted to parse more than two consecutive parsers, how would you implement that?
 

@@ -8,7 +8,7 @@ The `many` combinator accepts a parser `p` and returns a parser that accepts inp
 | ""    | [([], "")]                                   |
 | "A"   | [(['A'], ""), ([], "A")]                     |
 | "AA"  | [(['A', 'A'], ""), (['A'], "A"), ([], "AA")] |
-| "aAA" | []
+| "aAA" | [([], "aAA")]
 
 This is the first time that a parser returns multiple possible results. The different results correspond with the different options. Any number of times include
 

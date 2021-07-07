@@ -55,6 +55,6 @@ lazy(p) =
 This might be hard to read. The first parenthesized part `(p())` calls the producer. It will return a parser. That parser is then called with the input to return the parse result.
 
 ## Exercises
-1. What is the type of the `lazy` combinator.
+1. What is the type of the `lazy` combinator?
 2. Implement the `lazy` combinator.
 3. Is it possible not to use recursion?

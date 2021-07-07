@@ -26,5 +26,5 @@ token(t) =
 We use our Python inspired notation `input[n:]` to snip of the the length of the token `t` from our input.
 
 ## Exercises
-1. What is the type of the `token` parser.
+1. What is the type of the `token` parser?
 2. Implement the `token` parser.

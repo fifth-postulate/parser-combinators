@@ -4,6 +4,6 @@ Sometimes you are not interested in all possible ways of parsing input into a da
 The `first` parser does precisely that. Instead of returning all the possible parsing of an input, it only returns the first.
 
 ## Exercises
-1. What is the signature of the `first` parser.
+1. What is the signature of the `first` parser?
 2. Implement the `first` parser.
-3. How does the order of alternatives influence the semantics of `first`.
+3. How does the order of alternatives influence the semantics of `first`?

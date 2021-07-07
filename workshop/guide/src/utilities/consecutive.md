@@ -14,6 +14,6 @@ And combine the result of the name parser and the integer parser into a pair of 
 The `consecutive` parser will be build for this task. It accepts a sequence of parsers and a way to combine the intermediate results into a final result.
 
 ## Exercises
-1. What is the signature of the `consecutive` parser. Depending on the language you are working with, this can be a tricky question. Don't be afraid to sacrifice generality for practicality.
+1. What is the signature of the `consecutive` parser? Depending on the language you are working with, this can be a tricky question. Don't be afraid to sacrifice generality for practicality.
 2. Implement the `consecutive` parser.
 3. Use the `consecutive` parser to parse the tuple from the example.
