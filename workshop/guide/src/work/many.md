@@ -31,7 +31,7 @@ The implementation of the `many` parser is defined in terms of itself. The `lazy
 
 ```
 many(p) =
-    oneOf(map(combine, andThen(p, many(p))), succeed([]))
+    or(map(combine, andThen(p, many(p))), succeed([]))
 ```
 
 We are relying on combinators from earlier chapters. Because of this the implementation is not as exact, leaving some ideas to be explored.
