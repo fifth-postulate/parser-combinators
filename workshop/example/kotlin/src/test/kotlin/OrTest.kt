@@ -2,7 +2,7 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import org.junit.Test
 
-class OneOfTest {
+class OrTest {
 
     @Test
     fun `given the input matches the left parser, oneOf will match the input`() {
@@ -10,7 +10,7 @@ class OneOfTest {
         val right = character('B')
         val input = "ABC"
 
-        val result = oneOf(left, right)(input)
+        val result = or(left, right)(input)
 
         assertThat(result).isEqualTo(listOf('A' to "BC"))
     }
@@ -21,7 +21,7 @@ class OneOfTest {
         val right = character('B')
         val input = "BAC"
 
-        val result = oneOf(left, right)(input)
+        val result = or(left, right)(input)
 
         assertThat(result).isEqualTo(listOf('B' to "AC"))
     }
@@ -32,7 +32,7 @@ class OneOfTest {
         val right = character('B')
         val input = "aBC"
 
-        val result = oneOf(left, right)(input)
+        val result = or(left, right)(input)
 
         assertThat(result).isEqualTo(emptyList())
     }
