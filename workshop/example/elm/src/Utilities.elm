@@ -35,7 +35,7 @@ consecutive parsers =
                 combine ( x, xs ) =
                     x :: xs
             in
-            Parser.map combine <| Parser.andThen p <| consecutive ps
+            Parser.map combine <| Parser.and p <| consecutive ps
 
 
 oneOf : List (Parser a) -> Parser a
@@ -45,7 +45,7 @@ oneOf parsers =
             Parser.fail
 
         p :: ps ->
-            Parser.oneOf p <| oneOf ps
+            Parser.or p <| oneOf ps
 
 
 whitespace : Parser Char
@@ -65,17 +65,17 @@ sp parser =
 
 keepRight : Parser b -> Parser a -> Parser b
 keepRight right left =
-    Parser.map Tuple.second <| Parser.andThen left right
+    Parser.map Tuple.second <| Parser.and left right
 
 
 keepLeft : Parser b -> Parser a -> Parser a
 keepLeft right left =
-    Parser.map Tuple.first <| Parser.andThen left right
+    Parser.map Tuple.first <| Parser.and left right
 
 
 andThen : Parser b -> Parser a -> Parser ( a, b )
 andThen right left =
-    Parser.andThen left right
+    Parser.and left right
 
 
 pack : Parser a -> Parser b -> Parser c -> Parser b
@@ -118,4 +118,4 @@ separatedBy separator parser =
             parser
                 |> Parser.map List.singleton
     in
-    Parser.oneOf multiple single
+    Parser.or multiple single

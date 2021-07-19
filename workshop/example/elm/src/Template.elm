@@ -35,7 +35,7 @@ template : Parser Template
 template =
     let
         parser =
-            Parser.oneOf literal substitution
+            Parser.or literal substitution
     in
     Util.greedy parser
         |> Parser.map Concatenation

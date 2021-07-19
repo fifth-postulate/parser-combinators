@@ -43,13 +43,13 @@ token target input =
         []
 
 
-oneOf : Parser a -> Parser a -> Parser a
-oneOf left right input =
+or : Parser a -> Parser a -> Parser a
+or left right input =
     List.concat [ left input, right input ]
 
 
-andThen : Parser a -> Parser b -> Parser ( a, b )
-andThen first second input =
+and : Parser a -> Parser b -> Parser ( a, b )
+and first second input =
     let
         andThenSecond ( a, intermediate ) =
             second intermediate
@@ -91,7 +91,7 @@ many parser =
         combine ( head, tail ) =
             head :: tail
     in
-    oneOf (map combine <| andThen parser <| lazy (\_ -> many parser)) (succeed [])
+    or (map combine <| and parser <| lazy (\_ -> many parser)) (succeed [])
 
 
 many1 : Parser a -> Parser (List a)
@@ -100,4 +100,4 @@ many1 parser =
         combine ( head, tail ) =
             head :: tail
     in
-    map combine <| andThen parser <| many parser
+    map combine <| and parser <| many parser

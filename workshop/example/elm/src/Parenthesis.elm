@@ -11,7 +11,7 @@ type Tree
 
 tree : Parser Tree
 tree =
-    Parser.oneOf node leaf
+    Parser.or node leaf
 
 
 node : Parser Tree

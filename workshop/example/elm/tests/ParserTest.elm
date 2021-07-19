@@ -95,12 +95,12 @@ suite =
                     in
                     Expect.equal actual expected
             ]
-        , describe "oneOf"
+        , describe "or"
             [ test "matches left alternative" <|
                 \_ ->
                     let
                         parser =
-                            oneOf (character 'A') (character 'B')
+                            or (character 'A') (character 'B')
 
                         actual =
                             parser "ABCD"
@@ -113,7 +113,7 @@ suite =
                 \_ ->
                     let
                         parser =
-                            oneOf (character 'A') (character 'B')
+                            or (character 'A') (character 'B')
 
                         actual =
                             parser "BACD"
@@ -123,12 +123,12 @@ suite =
                     in
                     Expect.equal actual expected
             ]
-        , describe "andThen"
+        , describe "and"
             [ fuzz3 char char string "matches pair" <|
                 \f s rest ->
                     let
                         parser =
-                            andThen (character f) (character s)
+                            and (character f) (character s)
 
                         input =
                             rest
