@@ -13,7 +13,7 @@ This grammar accepts any number of the character 'a'. If we naively write a pars
 
 ```
 A =
-    oneOf(A(), character('a'))
+    or(A(), character('a'))
 ```
 
 The thoughts are: Our parser `A` is either
@@ -24,10 +24,10 @@ The thoughts are: Our parser `A` is either
 The first part is problematic, because when it calls the `A` parser it will go down an infinite path. If we would try to call `A` we would need to repeatedly call `A` without bounds.
 
 * `A()`
-* `oneOf(A(), character('a'))`
-* `oneOf(oneOf(A(), character('a')), character('a'))`
-* `oneOf(oneOf(oneOf(A(), character('a')), character('a')), character('a'))`
-* `oneOf(oneOf(oneOf(oneOf(A(), character('a')), character('a')), character('a')), character('a'))`
+* `or(A(), character('a'))`
+* `or(or(A(), character('a')), character('a'))`
+* `or(or(or(A(), character('a')), character('a')), character('a'))`
+* `or(or(or(or(A(), character('a')), character('a')), character('a')), character('a'))`
 * ...
 
 ## Solution
