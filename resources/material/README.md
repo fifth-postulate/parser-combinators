@@ -6,6 +6,7 @@ It contains
 1. A Guide
 2. Example Code
 3. Presentations
+4. Resources
 
 ## Guide
 The guide is a collections of webpages explaining the topic by providing theory, examples, exercises and projects. You can serve the guide by creating a small webserver, e.g. by running the following code from the workshop material directory
@@ -27,3 +28,6 @@ If you want to serve the presentation use the command below
 ```shell
 python3 -m http.server --directory presentation 78278
 ```
+
+## Resources
+Throughout the material you will find other files that could be beneficial for the understanding of parser combinators. Some are referenced from the guide, others are bonus material.
