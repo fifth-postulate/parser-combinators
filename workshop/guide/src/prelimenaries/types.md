@@ -50,7 +50,7 @@ In order to clearly express our thoughts we introduce types. There is a concrete
 1. Describe the following type in your own words.
 
 ```plain
-string -> [(integer,string)]
+string -> [(string,integer)]
 ```
 
 2. The function that counts the occurences of a certain character in a string could be denoted by `(string, character) -> integer`. A different view of this function is would be `string -> character -> integer`. This can be read as a function that accepts as argument a value of type `string` and returns a function of type `character -> integer`.

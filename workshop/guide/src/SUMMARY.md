@@ -41,5 +41,6 @@
 * [Aritmetic Expression](./project/expression.md)
 
 # Appendices
+* [Solutions](./appendix/solutions.md)
 * [Sources](./appendix/sources.md)
 * [Mediography](./appendix/mediography.md)
