@@ -1,11 +1,12 @@
 ARCHIVE=workshop-material.tar.gz
 MATERIAL_DIR=parser-combinator-workshop
+WEBPAGE_DIR=public
 SUB_DIRECTORIES=workshop
 CLEAN_TARGETS=$(addsuffix clean,$(SUB_DIRECTORIES))
 
 .PHONY: all clean ${SUB_DIRECTORIES} ${CLEAN_TARGETS}
 
-all: ${ARCHIVE}
+all: ${ARCHIVE} ${WEBPAGE_DIR}
 ${ARCHIVE}: ${MATERIAL_DIR} 
 	tar cvfz $@ $<
 
@@ -20,8 +21,14 @@ ${MATERIAL_DIR}: ${SUB_DIRECTORIES}
 ${SUB_DIRECTORIES}:
 	${MAKE} -C $@
 
+${WEBPAGE_DIR}: ${MATERIAL_DIR} ${ARCHIVE}
+	mkdir -p $@
+	cp -rf $</guide $@/guide
+	cp -rf $</presentation $@/presentation
+	cp resources/index.html $@/
+
 clean: ${CLEAN_TARGETS}
-	rm -rf ${ARCHIVE} ${MATERIAL_DIR}
+	rm -rf ${ARCHIVE} ${MATERIAL_DIR} ${WEBPAGE_DIR}
 
 %clean: %
 	${MAKE} -C $< clean
