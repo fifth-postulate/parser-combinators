@@ -25,7 +25,7 @@ ${WEBPAGE_DIR}: ${MATERIAL_DIR} ${ARCHIVE}
 	mkdir -p $@
 	cp -rf $</guide $@/guide
 	cp -rf $</presentation $@/presentation
-	cp resources/index.html $@/
+	cp resources/public/* $@/
 
 clean: ${CLEAN_TARGETS}
 	rm -rf ${ARCHIVE} ${MATERIAL_DIR} ${WEBPAGE_DIR}
