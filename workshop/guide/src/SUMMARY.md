@@ -36,7 +36,7 @@
 # Projects
 * [How to use it](./project/instructions.md)
 * [List of things](./project/list.md)
-* [Balanced parenthesis](./project/parens.md)
+* [Balanced parentheses](./project/parens.md)
 * [Template Language](./project/template.md)
 * [Aritmetic Expression](./project/expression.md)
 
