@@ -1,7 +1,7 @@
 # Parser Combinators
 Presentation and workshop about parser combinators.
 
-If you are looking to participate, make sure to download the [workshop material][material].
+If you are looking to participate, make sure to download the [workshop material][material] or follow the [workshop online][guide].
 
 ## Parts
 This repository is split in the following parts.
@@ -29,8 +29,9 @@ The packaging is described via a [`Makefile`][makefile].
 A release is made by the GitHub action [Publish Workshop Material][action:publish].
 
 [material]: https://github.com/fifth-postulate/parser-combinators/releases/download/latest/workshop-material.tar.gz
+[guide]: https://fifth-postulate.nl/parser-combinators/guide/
 [workshop]: https://github.com/fifth-postulate/parser-combinators/tree/main/workshop
 [presentation]: https://github.com/fifth-postulate/parser-combinators/tree/main/presentation
-[resources]: httsp://github.com/fifth-postulate/parser-combinators/tree/main/resources
+[resources]: https://github.com/fifth-postulate/parser-combinators/tree/main/resources
 [makefile]: https://github.com/fifth-postulate/parser-combinators/tree/main/Makefile
 [action:publish]: https://github.com/fifth-postulate/parser-combinators/actions/workflows/publish-material.yaml
