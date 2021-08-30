@@ -1,4 +1,4 @@
-module Parenthesis exposing (tree)
+module Parentheses exposing (tree)
 
 import Parser exposing (Parser)
 import Utilities as Util
