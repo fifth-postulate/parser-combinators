@@ -8,6 +8,13 @@ The reason we included these answers is to be self-contained. We would much pref
 1. The language of all the wrong ways of spelling bananan: `{"banan", "bananana", "ban", ...}`
 2. I think the English languages is finite for it is not possible to concatenate words in the English languages and form valid words. For this reason I think that Dutch is an infinite language.
 
+### EBNF
+1. Using the natural number from the chapter we could have
+
+```
+addition ::= number ("+" number)?
+```
+
 ### Types
 1. The types describes a function that accepts a string and returns a list of pairs of string and integer. An example of such functions would be a function that determines the frequency of all the words that occur in a text.
 2. `S -> U -> T`.
