@@ -1,7 +1,7 @@
 # character `A`
 One of the simplest parsers that depends on any input to parse is a parser that succeeds if the input starts with the character `'A'`.
 
-For example. *parserA* is a parser that succeeds if the input starts with the character `'A'`. Below we summarize our expectation for *parserA*.
+For example, *parserA* is a parser that succeeds if the input starts with the character `'A'`. Below we summarize our expectation for *parserA*.
 
 | input | *parserA()*   |
 |-------|---------------|
@@ -12,7 +12,7 @@ For example. *parserA* is a parser that succeeds if the input starts with the ch
 ## Implementation
 Below you can find some pseudo code for the `parserA` function.
 
-The implementation of the `parserA` parser relies on the capabilities of your language to work with `string`. Here we assume that your language can tell you when a certain string start with an other character. See the exercises for some pointers on how to solve the problem is your language does not provide such functionality.
+The implementation of the `parserA` function relies on the capabilities of your language to work with `string`. Here we assume that your language can tell you when a certain string start with an other character. See the exercises for some pointers on how to solve the problem if your language does not provide such functionality.
 
 
 ```
