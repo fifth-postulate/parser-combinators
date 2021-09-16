@@ -1,11 +1,11 @@
 # Any character
-The work we have done for the parsing a character `'A'`, could also be done for other characters.
+The work we have done for the parsing of a character `'A'`, could also be done for other characters.
 
 One could copy the implementation of *parserA* and change it into a *parserB*, a *parserC* or a *parser^* for that matter.
 
-Instead we will define a *character* parser that accepts the character to parse as an argument.
+Instead we will define a *character* function that accepts the character to parse as an argument.
 
-For example *character* is a parser that accepts a character as argument and returns a parser that succeeds if the input starts with that character. Below we summarize our expectation for *character*.
+That is, *character* is a parser that accepts a character as argument and returns a parser that succeeds if the input starts with that character. Below we summarize our expectation for *character*.
 
 | input | char | *character(char)* |
 |-------|------|-------------------|
@@ -16,7 +16,7 @@ For example *character* is a parser that accepts a character as argument and ret
 
 ## Implementation
 
-The implementation of the `character` parser has a lot in common with `parserA`.
+The implementation of the `character` function has a lot in common with `parserA`.
 
 ```
 character(char) =
@@ -27,6 +27,6 @@ character(char) =
 ```
 
 ## Exercises
-1. What is the type of the `character` parser?
-1. Implement the `character` parser.
+1. What is the type of the `character` function?
+1. Implement the `character` function.
 2. Implement `parserA` in terms of `character`. This is a common practice in this workshop. When you notice a common pattern in parsers, generalize it.
