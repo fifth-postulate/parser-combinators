@@ -3,7 +3,7 @@ Before we start out creating a parser combinator framework, it is good to consid
 
 > What is a parser?
 
-In this workshop a parser is "function" that takes as input a `string` that describes some structure, and returns representation of that structure in memory.
+In this workshop a parser is a "function" that takes as input a `string` that describes some structure, and returns a representation of that structure in memory.
 
 For example, say that we are handed the string `"37"`. If we are told that the string contains a description of an integer, we might wan to use a parser to turn that description into an actual integer. I.e. the integer `37`.
 
@@ -12,7 +12,7 @@ There is a problem though. What if we are told that the input contains a descrip
 So we need a way for parsers to signal that they could fail.
 
 ## Signature
-We need a way to distuingish between a parser that fails and a parser that succeeds. We will use a list for that. If a parser fails we return an empty list. If a parser succeeds we return a non-empty list. But what should we return in the list.
+We need a way to distuingish between a parser that fails and a parser that succeeds. We will use a list for that. If a parser fails we return an empty list. If a parser succeeds we return a non-empty list. But what should we return in the list?
 
 ### First thought
 As a first thought you might guess that we should return the structure for which the input is a description. This would work in the example above. Unfortunatly, that choice is not very composable.
@@ -22,9 +22,9 @@ For this to make sense we have to understand our overal goal. What we would like
 Keeping track of the which part of the input is consumed is tedious, especially if it has to be done anew for each parser we create.
 
 ### Second thought
-An other option is to not only return the structure, but also the part of the input that is unprocessed. For example, say that we an have an input that represents a tuple of a age and an name. I.e. `"41 daan"`. We could use our parser that parses an integer for the age part. If it would only return the integer, it would not be easy to combine other parsers.
+An other option is to not only return the structure, but also the part of the input that is unprocessed. For example, say that we have an input that represents a tuple of a age and a name. I.e. `"41 daan"`. We could use our parser that parses an integer for the age part. If it only returned the integer, it would be hard to combine with other parsers.
 
-Instead if the integer parser would return `[(41, " daan")]`, other parser could pick up where the integer parser left off.
+Instead if the integer parser would return `[(41, " daan")]`, an other parser could pick up where the integer parser left off.
 
 ### Final Form
 So the final form of our parser is as follows. It is a function that accepts a `string` and returns a list of pairs. The first component of the pair is the structure that the parser has parsed, the second component of the pair is the remaining part of the input.
@@ -44,7 +44,7 @@ Some language have functions as first class citizen. You are in luck if you are 
 If the language of your choice does not have good support for functions, don't worry. You could mimic the technique in this workshop. It might be a bit verbose at some points, but the ideas are still worthwhile.
 
 ### Returning List
-We opted to have a List as return type. This is a choice and you could take a different route here.
+We opted to have a list as return type. This is a choice and you could take a different route here.
 
 The choice isn't without thought. One of the first descriptions of parser combinators also used list in their return type. This allows to signal failure to parse with an empty list and to signal success with a singleton list.
 
