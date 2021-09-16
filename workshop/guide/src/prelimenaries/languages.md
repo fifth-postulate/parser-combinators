@@ -10,13 +10,13 @@ An element in a language is called a _word_.
 
 Some examples of languages are
 
-* The language consisting of the authors names: `{"daan", "geert}`.
+* The language consisting of the authors names: `{"daan", "geert"}`.
 * The language consisting of one of the authors childrens names: `{"sophie", "robin", "hannah"}`.
 * The language of all english words: `{"ape", "avacado", ... }`.
 * The language of words solely consisting of any number of `'a'`s: `{"", "a", "aa", "aaa", ... }`.
 
 ## Categories
-There are languages in all shapes and sizes. Some languages are finite, such as the language consisting of the autors names. Other languages are infinite.
+There are languages in all shapes and sizes. Some languages are finite, such as the language consisting of the authors names. Other languages are infinite.
 
 Some languages have a lot of structure which can be captured in a _grammar_, which will be the subject of our next chapter. 
 
