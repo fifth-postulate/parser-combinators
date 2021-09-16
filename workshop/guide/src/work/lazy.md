@@ -6,7 +6,7 @@ What we are about to do is define parser combinators that are defined in terms o
 This can be problematic. The problem is that our combinators have to return a parser. They can't predict how deeply nested a parser needs to be called. Take a look at the following grammar.
 
 ```
-A ::= A | a;
+A ::= A | "a";
 ```
 
 This grammar accepts any number of the character 'a'. If we naively write a parser we would might write the following.
@@ -42,17 +42,17 @@ One could implement a producer with an anonymous function. Say we have a parser 
 _ => A
 ```
 
-Here we use an underscore `_` to signify that we are not interested in the actual value.
+Here we use an underscore `_` to signify that we are not interested in the actual argument.
 
 ### combinator
-The last ingredient is a combinator that accepts a producer for a parser and uses returns a parser that uses it.
+The last ingredient is a combinator that accepts a producer for a parser and returns a parser that uses it.
 
 ```
 lazy(p) =
-    input => (p())(input)
+    input => (p ())(input)
 ```
 
-This might be hard to read. The first parenthesized part `(p())` calls the producer. It will return a parser. That parser is then called with the input to return the parse result.
+This might be hard to read. The first parenthesized part `(p ())` calls the producer. It will return a parser. That parser is then called with the input to return the parse result.
 
 ## Exercises
 1. What is the type of the `lazy` combinator?
