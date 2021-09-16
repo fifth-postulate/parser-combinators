@@ -53,6 +53,7 @@ So don't dismiss them just yet, they will come in handy rather sooner then later
 
 ## Exercises
 1. Provide your own example to cement your understanding of `succeed`. Discuss your example with somebody.
-2. Implement the `succeed` parser in your language of choice. You will have to choose how to represent functions.
+2. Implement the `succeed` function in your language of choice. You will have to choose how to represent functions.
 3. Make sure you are confident your implementation works as expected. You could write tests, use a read-eval-print-loop (REPL) or any other means to check.
-4. Implement the `fail` parser and test your implementation. 
+4. What is the type of the `fail` function?
+5. Implement `fail` and test your implementation. 

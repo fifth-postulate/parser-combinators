@@ -35,6 +35,7 @@ Some of the questions in this chapter ask for an implementation. See the example
 
 ### Succeed and Friends
 1. The `succeed("Hello, World!")` is a parser that does not consume the any input and always returns `"Hello, World"`.
+4. `() -> string -> [()]`.
 
 ### Character A
 1. `string -> [(string, string)]`.
