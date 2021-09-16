@@ -17,6 +17,8 @@ just(p) =
     input => filter ((r, rest) => rest == "") (p input)
 ```
 
+Here `filter` is a function that accepts a list and keeps all the elements in the list that satisfy the predicate.
+
 ## Exercises
-1. What is the type of the `just` parser?
-2. Implement the `just` parser.
+1. What is the type of the `just` combinator?
+2. Implement the `just` combinator.
