@@ -27,17 +27,17 @@ This can be seen in our results. In the example with the input `"AA"` the parser
 All these results are returned, in the order from most input consumed to least input consumed.
 
 ## Implementation
-The implementation of the `many` parser is defined in terms of itself. The `lazy` combinator allows a call to the parser you are defining without blowing the call stack. Our pseudo-code had this build in 😁.
+The implementation of the `many` combinator is defined in terms of itself. The `lazy` combinator allows a call to the parser you are defining without blowing the call stack. Our pseudo-code had this build in 😁.
 
 ```
 many(p) =
-    or(map(combine, andThen(p, many(p))), succeed([]))
+    or(map(combine, and(p, many(p))), succeed([]))
 ```
 
 We are relying on combinators from earlier chapters. Because of this the implementation is not as exact, leaving some ideas to be explored.
 
 ## Exercises
-1. What is the type the `many` parser?
+1. What is the type the `many` combinator?
 2. What is the type of the `combine` function used to map the result of parser `p` and then `many(p)`?
 3. Implement the `combine` function.
 4. Implement the `many` combinator. Don't forget to be lazy. 
