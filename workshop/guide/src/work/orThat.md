@@ -1,11 +1,11 @@
 # Parse this or that
-With a basic parser under our belt, we can start looking at a combinator. A combinator is a function that *combines* simpler things into a more complex thing.
+With some basic parsers under our belt, we can start looking at a combinator. A combinator is a function that *combines* simpler things into a more complex thing. In our case, it combines simpler parsers into a more complex parser.
 
-Sometimes we have an option. Either we want to parse a number, or we want to parse a variable name. If we have simpler parsers that parse a number and another that parse a variable name, we can combine them into a more complex that could parse either of the two.
+Sometimes you find yourself at a cross road. Either we want to parse a number, or we want to parse a variable name. If we have simpler parser that can parse a number and another parser that can parse a variable name, we can combine them into a more complex parser that could parse either of the two.
 
 Assuming we have parsers `A = character('A')` and `B = character('B')`, below you find a table of our expectations for the `or` combinator.
 
-| input | *or(A, B)* |
+| input | *or(A, B)*    |
 |-------|---------------|
 | "ABC" | [("A", "BC")] |
 | "BAC" | [("B", "AC")] |
@@ -21,7 +21,7 @@ A combinator is a [higher order function][wikipedia:higher-order-function]. I.e.
 > * takes one or more functions as arguments,
 > * returns a function as its result.
 
-In our case it does both. We accept two parsers, which themselves are functions and in turn returns a parser, again a function. The type of the `or` is
+In our case it does both. We accept two parsers, which themselves are functions and in turn returns a parser, again a function. The type of `or` is
 
 ```
 or : (string -> [(T, string)]) -> (string -> [(T, string)]) -> (string -> [(T, string)])
