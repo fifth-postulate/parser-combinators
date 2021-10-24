@@ -14,6 +14,37 @@ class: middle, center
 
 --
 
+Very simple parser that parses an 'A'
+```kotlin
+fun parseA(input: String): Char
+```
+
+--
+
+What if the input does not match?
+```kotlin
+fun parseA(input: String): List<Char>
+```
+--
+
+We want to chain parser, so we need the remainder of the input for a next parser:
+```kotlin
+fun parseA(input: String): List<Pair<Char, String>>
+```
+
+--
+
+```kotlin
+fun parseA(input: String): List<Pair<Char, String>> =
+    if (input.startsWith('A')) {
+        listOf('A' to input.drop(1))
+    } else {
+        emptyList()
+    }
+```
+
+---
+
 ```kotlin
 typealias Parser<T> = (String) -> List<Pair<T, String>>
 ```
