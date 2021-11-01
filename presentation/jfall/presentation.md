@@ -46,12 +46,6 @@ fun parseA(input: String): List<Pair<Char, String>> =
 typealias Parser<T> = (String) -> List<Pair<T, String>>
 ```
 
---
-
-```kotlin
-typealias P<T> = Parser<T>
-```
-
 ---
 layout: true
 class: middle, center 
