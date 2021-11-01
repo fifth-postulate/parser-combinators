@@ -141,8 +141,14 @@ fun <T> many(p: Parser<T>): Parser<List<T>> =
         succeed(emptyList())
     )
 ```
+---
+layout: true
+class: middle, center 
 
 ---
 ## Final thoughts
 
----
+???
+
+* Parsing is not scary
+* Starting with simple building blocks and combining them is a powerfull concept
