@@ -123,6 +123,16 @@ fun <T, U> map(p: Parser<T>, transform: (T) -> U): Parser<U> = { input ->
 ---
 
 ```kotlin
+fun <T> many(p: Parser<T>): Parser<List<T>> =
+    or(
+        map(and(p, many(p))) { (r, rs) -> listOf(r) + rs },
+        succeed(emptyList())
+    )
+```
+
+--
+
+```kotlin
 fun <T> lazy(producer: () -> Parser<T>): Parser<T> = { input ->
     producer()(input)
 }
@@ -133,7 +143,7 @@ fun <T> lazy(producer: () -> Parser<T>): Parser<T> = { input ->
 ```kotlin
 fun <T> many(p: Parser<T>): Parser<List<T>> =
     or(
-        map(and(p, lazy { many(p) })) { (r, rs) -> listOf(r) + rs},
+        map(and(p, lazy { many(p) })) { (r, rs) -> listOf(r) + rs },
         succeed(emptyList())
     )
 ```

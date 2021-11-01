@@ -9,8 +9,8 @@ python -m SimpleHTTPServer
 ```
 
 ## TODO
-- CSS
-- Signatuur boven in scherm
-- lazy wissel
-- JSON parser schrijven
-- Combinator evangelie
+- [ ] CSS
+- [*] Signatuur boven in scherm
+- [*] lazy wissel
+- [ ] JSON parser schrijven
+- [ ] Combinator evangelie
