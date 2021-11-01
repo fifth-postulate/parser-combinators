@@ -156,6 +156,85 @@ layout: true
 class: middle, center 
 
 ---
+## Combining the combinators
+
+---
+
+### JSON Grammar
+
+```
+json
+    element
+
+value
+    object
+    array
+    string
+    number
+    "true"
+    "false"
+    "null"
+
+object
+    '{' ws '}'
+    '{' members '}'
+
+members
+    member
+    member ',' members
+
+member
+    ws string ws ':' element
+
+...
+```
+---
+
+```
+sealed interface Value
+data class JSONObject(val members: List<Member>): Value
+data class JSONArray(val elements: List<Value>): Value
+...
+
+fun value(): Parser<Value> =
+    or(
+        object(),
+        or(
+            array(),
+            or(
+                string(),
+                or(
+                    ...
+                )
+            )
+        )
+    )
+```
+---
+```
+sealed interface Value
+data class JSONObject(val members: List<Member>): Value
+data class JSONArray(val elements: List<Value>): Value
+...
+
+fun <T> oneOf(vararg ps: Parser<T>): Parser<T> =
+    ps.reduce { a, b ->
+        or(a, b)
+    }
+
+fun value(): Parser<Value> =
+    oneOf(
+        object(),
+        array(),
+        string(),
+        number(),
+        map(fixedString("true")) { JSONBoolean(true) },
+        map(fixedString("true")) { JSONBoolean(false) },
+        map(fixedString("true")) { JSONNull() },
+    )
+
+```
+---
 ## Final thoughts
 
 ???
