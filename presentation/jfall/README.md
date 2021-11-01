@@ -9,8 +9,9 @@ python -m SimpleHTTPServer
 ```
 
 ## TODO
-- [ ] CSS
+- [*] Ratio
+- [ ] CSS -> highlighting?
 - [*] Signatuur boven in scherm
 - [*] lazy wissel
 - [ ] JSON parser schrijven
-- [ ] Combinator evangelie
+- [ ] Combinator evangelie -> puntjes?

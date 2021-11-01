@@ -1,5 +1,6 @@
 (function(){
   let slideshow = remark.create({
+    ratio: '16:9',
     sourceUrl: 'presentation.md'
   });
  
