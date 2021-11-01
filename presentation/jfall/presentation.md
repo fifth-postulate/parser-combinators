@@ -54,6 +54,7 @@ typealias P<T> = Parser<T>
 
 ---
 layout: true
+class: middle, center 
 
 .note[`Parser<T> = (String) -> List<Pair<T, String>>`]
 
