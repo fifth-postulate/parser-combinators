@@ -52,9 +52,10 @@ typealias Parser<T> = (String) -> List<Pair<T, String>>
 typealias P<T> = Parser<T>
 ```
 
-???
+---
+layout: true
 
-* TODO create a note template
+.note[`Parser<T> = (String) -> List<Pair<T, String>>`]
 
 ---
 
