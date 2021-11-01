@@ -7,9 +7,6 @@ class: middle, center
 
 ---
 
-.wide.image[![Conversation on Java Gilde Teams channel delaying the start of presentations](image/conversation.png)]
-
----
 ## Parser
 
 --
@@ -101,7 +98,7 @@ fun <T> or(left: Parser<T>, right: Parser<T>): Parser<T> = { input ->
 ---
 
 ```kotlin
-fun <S, T> and(left: Parser<S>, right: Parser<T>): Parser<Pair<S, T>> = { input ->
+fun <L, R> and(left: Parser<L>, right: Parser<R>): Parser<Pair<L, R>> = { input ->
     left(input).flatMap { (l, intermediate) ->
         right(intermediate).map { (r, remainder) ->
             l to r to remainder
@@ -138,3 +135,8 @@ fun <T> many(p: Parser<T>): Parser<List<T>> =
         succeed(emptyList())
     )
 ```
+
+---
+## Final thoughts
+
+---
