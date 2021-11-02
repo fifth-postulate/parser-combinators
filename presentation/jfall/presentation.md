@@ -11,23 +11,33 @@ class: middle, center
 
 --
 
-Very simple parser that parses an 'A'
 ```kotlin
 fun parseA(input: String): Char
 ```
 
+???
+
+* Very simple parser that parses an 'A'
+
 --
 
-What if the input does not match?
 ```kotlin
 fun parseA(input: String): List<Char>
 ```
+
+???
+
+* What if the input does not match?
+
 --
 
-We want to chain parser, so we need the remainder of the input for a next parser:
 ```kotlin
 fun parseA(input: String): List<Pair<Char, String>>
 ```
+
+???
+
+* We want to chain parser, so we need the remainder of the input for a next parser:
 
 --
 
