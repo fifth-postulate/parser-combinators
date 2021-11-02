@@ -190,7 +190,7 @@ member
 ```
 ---
 
-```
+```kotlin
 sealed interface Value
 data class JSONObject(val members: List<Member>): Value
 data class JSONArray(val elements: List<Value>): Value
@@ -211,7 +211,7 @@ fun value(): Parser<Value> =
     )
 ```
 ---
-```
+```kotlin
 sealed interface Value
 data class JSONObject(val members: List<Member>): Value
 data class JSONArray(val elements: List<Value>): Value
