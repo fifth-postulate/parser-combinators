@@ -3,7 +3,9 @@ class: middle, center
 
 
 ---
-# How to implement a parser in 16 minutes or less
+# How to implement a parser in 16 minutes 
+
+## - or less - 
 
 ---
 
@@ -27,7 +29,8 @@ fun parseA(input: String): List<Char>
 
 ???
 
-* What if the input does not match?
+* What if the input does not match? This is also useful for ambiguous grammars,
+  because it allows multiple matches. This is out of scope of this talk though.
 
 --
 
@@ -49,6 +52,10 @@ fun parseA(input: String): List<Pair<Char, String>> =
         emptyList()
     }
 ```
+
+???
+
+* And this is our first parser! Well within 16 minutes!
 
 ---
 
@@ -163,8 +170,7 @@ class: middle, center
 ### JSON Grammar
 
 ```
-json
-    element
+...
 
 value
     object
@@ -188,6 +194,10 @@ member
 
 ...
 ```
+
+???
+* This is a part of the JSON grammar.
+
 ---
 
 ```kotlin
@@ -240,5 +250,6 @@ fun value(): Parser<Value> =
 ???
 
 * Parsing is not scary
-* Starting with simple building blocks and combining them is a powerfull concept
+* Starting with simple building blocks and combining them is a powerful 
+  concept; not just for parsers.
 * For more information read the next Java Magazine
