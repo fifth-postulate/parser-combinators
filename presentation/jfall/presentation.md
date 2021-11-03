@@ -241,3 +241,4 @@ fun value(): Parser<Value> =
 
 * Parsing is not scary
 * Starting with simple building blocks and combining them is a powerfull concept
+* For more information read the next Java Magazine
