@@ -27,5 +27,4 @@ public record And<L, R>(Parser<L> first, Parser<R> second) implements Parser<Pai
     public static <U, V> Parser<Pair<U, V>> and(Parser<U> first, Parser<V> second) {
         return new And<>(first, second);
     }
-
 }
