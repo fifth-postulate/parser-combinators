@@ -15,7 +15,7 @@ import static nl.fifthpostulate.parser.combinator.Or.or;
 
 public class Many {
     private Many(){}
-    
+
     public static <U> List<U> prepend(Pair<U, List<U>> p) {
         List<U> result = new ArrayList<>();
         result.add(p.first());
