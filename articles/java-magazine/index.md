@@ -118,7 +118,7 @@ D: It works!
 G: Whoop whoop!
 
 G: If we can do `or` we can do `and`.
-D: :mindblown:
+D: 🤯
 D: Like this?
 
 ```kotlin
