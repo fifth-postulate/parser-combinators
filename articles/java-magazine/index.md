@@ -154,7 +154,7 @@ fun main() {
 ```
 
 ```plain
-(AB, C)
+("AB", "C")
 ```
 
 - D: The first element of the pair is no longer a list, but a String! Just as expected!
@@ -169,8 +169,8 @@ fun <T> star(p: Parser<T>): Parser<List<T>> = { input ->
     val result = p(input)
     if (result != null) {
         val (match, intermediate) = result
-        val (remaining, rest) = star(intermediate)
-        (match + remaining) to rest
+        val (remaining, rest) = star(p)(intermediate)
+        (listOf(match) + remaining) to rest
     } else {
         emptyList() to input
     }
@@ -188,7 +188,7 @@ fun main() {
 ```
 
 ```plain
-([A, A, A, A, A], B)
+(['A', 'A', 'A', 'A', 'A'], "B")
 ```
 
 - G: It works, but looking at the code it feels a bit ... imperative.
@@ -197,9 +197,9 @@ fun main() {
 - D: Let me puzzle on this one:
 
 ```kotlin
-fun <T> star2(p: Parser<T>): Parser<List<T>> =
+fun <T> star(p: Parser<T>): Parser<List<T>> =
     or(
-        map(and(p, star2(p))) { (r, rs) -> listOf(r) + rs },
+        map(and(p, star(p))) { (r, rs) -> listOf(r) + rs },
         { input -> emptyList<T>() to input }
     )
 ```
@@ -210,38 +210,38 @@ fun <T> star2(p: Parser<T>): Parser<List<T>> =
 ```plain
 Exception in thread "main" java.lang.StackOverflowError
 	at kotlin.jvm.internal.Intrinsics.checkNotNullParameter(Intrinsics.java:130)
-	at com.alliander.ptutools.TempJavaMagParserKt.star2(TempJavaMagParser.kt)
-	at com.alliander.ptutools.TempJavaMagParserKt.star2(TempJavaMagParser.kt:62)
-	at com.alliander.ptutools.TempJavaMagParserKt.star2(TempJavaMagParser.kt:62)
+	at com.alliander.ptutools.TempJavaMagParserKt.star(TempJavaMagParser.kt)
+	at com.alliander.ptutools.TempJavaMagParserKt.star(TempJavaMagParser.kt:62)
+	at com.alliander.ptutools.TempJavaMagParserKt.star(TempJavaMagParser.kt:62)
 	...
 ```
 
-- D: Oops!
-- G: We need a bigger stack!
-- D: No, we should delay the evaluation of the inner star function to when we really need it!
-- G: Yeah! What do you suggest?
-- D: We can make the evaluation lazy.
+- D: Oops! We need a bigger stack!
+- G: No, we should delay the evaluation of the inner star function to when we really need it!
+- D: I am puzzled, what do you suggest?
+- G: We can make the evaluation lazy.
 
 ```kotlin
 fun <T> lazy(parserProducer: () -> Parser<T>): Parser<T> = { input ->
     parserProducer()(input)
 }
-fun <T> star3(p: Parser<T>): Parser<List<T>> =
+
+fun <T> star(p: Parser<T>): Parser<List<T>> =
     or(
-        map(and(p, lazy { star3(p) } )) { (r, rs) -> listOf(r) + rs },
+        map(and(p, lazy { star(p) } )) { (r, rs) -> listOf(r) + rs },
         { input -> emptyList<T>() to input }
     )
 ```
 
 ```kotlin
 fun main() {
-    val p = star3(character('A'))
-    println(p("AAAA"))
+    val p = star(character('A'))
+    println(p("AAAAAB"))
 }
 ```
 
 ```plain
-([A, A, A, A], )
+(['A', 'A', 'A', 'A', 'A'], "B")
 ```
 
 - G: Works like a charm! There is one small remark left. The second argument of the `or`, is a function that returns a parser that always succeeds.
@@ -251,6 +251,7 @@ fun main() {
 fun <T> succeed(value: T): Parser<T> = { input ->
     value to input
 }
+
 fun <T> fail(): Parser<T> = { _ ->
     null
 }
