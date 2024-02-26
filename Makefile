@@ -16,7 +16,7 @@ ${MATERIAL_DIR}: ${SUB_DIRECTORIES}
 	cp -rf workshop/guide/book $@/guide
 	mkdir -p $@/example
 	cp -rf workshop/example/* $@/example
-	cp -rf presentation $@/presentation
+	cp -rf presentations $@/presentations
 
 ${SUB_DIRECTORIES}:
 	${MAKE} -C $@
@@ -24,7 +24,7 @@ ${SUB_DIRECTORIES}:
 ${WEBPAGE_DIR}: ${MATERIAL_DIR} ${ARCHIVE}
 	mkdir -p $@
 	cp -rf $</guide $@/guide
-	cp -rf $</presentation $@/presentation
+	cp -rf $</presentations $@/presentation
 	cp resources/public/* $@/
 
 clean: ${CLEAN_TARGETS}
