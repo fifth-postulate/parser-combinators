@@ -7,7 +7,6 @@ In this article we will remedy that and introduce the reader with the idea of pa
 
 - D: Geert, what is a parser actually?
 - G: Glad you asked Daan! A parser is a function that transforms text into objects.
-
 - D: So this would be a good signature
 
 ```kotlin
@@ -16,14 +15,14 @@ In this article we will remedy that and introduce the reader with the idea of pa
 
 - G: Hmmm, almost
 - D: What is wrong with it?
-- G: Well, what would you return when the you expect a number and the text is "banana"?
+- G: Well, what would you return when you expect a number and the text is "banana"?
 - D: Ah, I see. We are missing the possiblity to express a failure. Would this be better?
 
 ```kotlin
 (String) -> T?
 ```
 
-- G: Yes, this is a parser... But we can do better!
+- G: Yes, this is somewhat better... But we can do even better!
 - D: How?
 - G: What if we could combine functions with this "parser signature" in a way that they become bigger and better parsers?
 - D: Sounds great! How would we go about this?
@@ -42,10 +41,10 @@ typealias Parser<T> = (String) -> Pair<T, String>?
 ```
 
 - D: You said something about combining parsers?
-- G: I did! But maybe it would be nice if we would implement a few simple parsers? Just to play with the signature and the concept a little bit?
+- G: I did! But maybe it is better to implement a few simple parsers first. Just to play with the signature and the concept a little bit.
 - D: Good idea! What about a parser that parses a single 'A' from a String?
 - G: Yes, good one! What would you suggest?
-- D: I think the following does implement the Parser signature:
+- D: I think the following does implement the `Parser<Char>` signature:
 
 ```kotlin
 fun parseA(input: String): Pair<Char, String>? =
@@ -57,7 +56,7 @@ fun parseA(input: String): Pair<Char, String>? =
 ```
 
 - G: It does! Would it not be great if you can make this more generic?
-- D: Do you want to accept the charcter to match? Like so
+- D: Do you want to accept the character to match? Like so
 
 ```kotlin
 fun character(needle: Char): Parser<Char> = { input ->
@@ -68,14 +67,16 @@ fun character(needle: Char): Parser<Char> = { input ->
     }
 }
 ```
-- G: Yes!
+
+- D: Wait, I am actually returning a function!
+- G: That is what functional programming is all about.
 - D: My head hurts a little, and it's late now, lets get some rest and continue tomorrow?
 - G: Okay! Goodnight!
 
 ## Part two: combining parsers
 
-- G: Hi Daan, brotha from another motha, how did you sleep?
-- D: Wazzaap, I was thinking about parsers. You mentioned that it would be nice to combine them. How does that work?
+- G: Hi Daan, are you well rested, ready to go?
+- D: I am well rested, thank you. I was dreaming about parsers. You mentioned that it would be nice to combine them. How does that work?
 
 - G: Well, lets say you have a parser for an 'A' and a parser for a 'B'. You want to have a parser that parses either 'A' or 'B'.
 - D: That would be nice. Would this work
@@ -116,7 +117,6 @@ null
 
 - D: It works!
 - G: Whoop whoop!
-
 - G: If we can do `or` we can do `and`.
 - D: 🤯
 - D: Like this?
@@ -157,10 +157,9 @@ fun main() {
 ("AB", "C")
 ```
 
-- D: The first element of the pair is no longer a list, but a String! Just as expected!
-
+- D: The result is no longer a `Pair<Char, Char>`, but a `String`! Just as expected!
 - G: What other combinators can you think of?
-- D: Let me see... zero or more occurences of 'A'?
+- D: Let me see... zero or more occurrences of 'A'?
 - G: That is a good suggestion
 - D: Hmm, let me think of an implementation
 
@@ -194,7 +193,7 @@ fun main() {
 - G: It works, but looking at the code it feels a bit ... imperative.
 - D: What do you suggest?
 - G: We can express the star operation in terms of 'and', 'or' and 'map'
-- D: Let me puzzle on this one:
+- D: That is a novel idea! Let me puzzle on this one:
 
 ```kotlin
 fun <T> star(p: Parser<T>): Parser<List<T>> =
@@ -204,7 +203,7 @@ fun <T> star(p: Parser<T>): Parser<List<T>> =
     )
 ```
 
-- G: Very nice! You have defined the star operation recursively in terms of itself! This compiles, but will give you an error on runtime. Shall we see?
+- G: Very nice! You have defined the star combinator recursively in terms of itself! This compiles, but will give you an error on runtime. Shall we see?
 - D: Yes! Let's go!
 
 ```plain
@@ -217,7 +216,7 @@ Exception in thread "main" java.lang.StackOverflowError
 ```
 
 - D: Oops! We need a bigger stack!
-- G: No, we should delay the evaluation of the inner star function to when we really need it!
+- G: No, we should delay the evaluation of the inner star combinator to when we really need it!
 - D: I am puzzled, what do you suggest?
 - G: We can make the evaluation lazy.
 
@@ -232,6 +231,7 @@ fun <T> star(p: Parser<T>): Parser<List<T>> =
         { input -> emptyList<T>() to input }
     )
 ```
+- D: I am so excited, and I just can't hide it!
 
 ```kotlin
 fun main() {
@@ -256,3 +256,138 @@ fun <T> fail(): Parser<T> = { _ ->
     null
 }
 ```
+
+- D: Wow, this combinator-stuff is powerful, but also draining. Can we pick this up again tomorrow?
+- G: Sure thing!
+
+## Part three: functional parser
+
+- D: How are you today, Geert?
+- G: Great! Do you want to continue playing around with parser combinators?
+- D: Yes, I would like to continue. I want to parse the following kind of binary expressions:
+
+```plain
+110010+1100-10010-110+100
+```
+
+- D: It should return "the answer".
+- G: We can surely parse such expressions with our library of combinators.
+- G: What parts do you recognize in your expression
+- D: Hmmm,... I see binary numbers, like `110` and `110010`, as well as operators `+` and `-`.
+- G: Let's focus on the numbers first.
+- D: Okay. Let me give it a try.
+
+```kotlin
+fun number(): Parser<Int> =
+    and(leadingDigit(), star(digit()))
+
+fun leadingDigit() =
+    character('1')
+
+fun digit() =
+    or(character('0'), character('1'))
+```
+
+G: This will not compile because you did not map the result to an `Int`.
+D: You are so smart!
+
+```kotlin
+fun number(): Parser<Int> =
+    map(and(leadingDigit(), star(digit()))) { (digit, digits) ->
+        (listOf(digit) + digits).fold(0) { acc, d ->
+            2 * acc + d
+        }
+    }
+
+fun leadingDigit(): Parser<Int> =
+    map(character('1')) {_ -> 1}
+
+fun digit(): Parser<Int> =
+    or(map(character('0')) {_ -> 0}, map(character('1')) {_ -> 1})
+```
+- G: Let's see if it will parse a binary number.
+- D: I am confident, that it will work!
+
+```kotlin
+fun main() {
+    val p = number()
+    println(p("101010"))
+}
+```
+
+```plain
+(42, )
+```
+
+- D: It works like a charm!
+- G: Let's move on to the operators.
+- D: I think have it
+
+```kotlin
+fun operator() =
+    or(character('+'), character('-'))
+```
+
+- G: Aren't you forgetting something?
+- D: Of course! I should map it to something that we need.
+- G: Exactly
+- D: Would this work?
+
+```kotlin
+fun operator(): Parser<(Int, Int) -> Int> =
+    or(
+        map(character('+')) {_ -> Int::plus },
+        map(character('-')) {_ -> Int::minus },
+    )
+```
+
+- G: Excellent!
+- G: Now you are ready to write the entire parser, my young Padawan!
+- D: Am I?
+- D: I will try
+
+```kotlin
+fun expression(): Parser<Int> =
+    or(
+        map(and(
+            and(number(), operator()),
+            lazy(::expression),
+        )) { (first, right) ->
+            val (left, op) = first
+            op(left, right)},
+        number()
+    )
+```
+
+- D: I think this works
+- G: Let's try it
+
+```kotlin
+fun main() {
+    val p = expression()
+    println(p("100000+1000+10"))
+}
+```
+
+```plain
+(42, )
+```
+
+## Closing Thoughts
+
+Later the protagonists gathered for a final time.
+
+- D: Shall I commit this to the repository?
+- G: No!
+- D: Why not?
+- G: Although there is nothing wrong with the code we have written, it is not complete nor battle tested.
+- G: You learned a valuable tool, but we should seek a library that fits our needs
+- D: 🤦
+- D: You are right, I got carried away in my enthusiasm.
+
+## Assignments
+The `number` parser in the functional parser section is not complete. It does not parse the valid binary number `0`. Can you fix the `number` parser to accept `0` as well?
+
+The ergonomics of the combinator leave something to be desired. Can you write an `and`/`or` parser that allows any number of arguments?
+
+There is a subtle bug with associativity in the expression parser. Did you catch that? Can you fix it?
