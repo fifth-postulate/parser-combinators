@@ -16,7 +16,7 @@ In this article we will remedy that and introduce the reader with the idea of pa
 - G: Hmmm, almost
 - D: What is wrong with it?
 - G: Well, what would you return when you expect a number and the text is "banana"?
-- D: Ah, I see. We are missing the possiblity to express a failure. Would this be better?
+- D: Ah, I see. We are missing the possibility to express a failure. Would this be better?
 
 ```kotlin
 (String) -> T?
@@ -25,8 +25,8 @@ In this article we will remedy that and introduce the reader with the idea of pa
 - G: Yes, this is somewhat better... But we can do even better!
 - D: How?
 - G: What if we could combine functions with this "parser signature" in a way that they become bigger and better parsers?
-- D: Sounds great! How would we go about this?
-- G: Say a text that starts with a number, but ends with " + 12", we would like a next parser to continue where we left of. So we need a way to return this left-over text.
+- D: Sounds great! How would we go about that?
+- G: Say a text that starts with a number, but ends with "+10", we would like a next parser to continue where we left of. So we need a way to return this left-over text.
 - D: So what about this:
 
 ```kotlin
@@ -42,7 +42,7 @@ typealias Parser<T> = (String) -> Pair<T, String>?
 
 - D: You said something about combining parsers?
 - G: I did! But maybe it is better to implement a few simple parsers first. Just to play with the signature and the concept a little bit.
-- D: Good idea! What about a parser that parses a single 'A' from a String?
+- D: Good idea! What about a parser that parses a single `'A'` from a String?
 - G: Yes, good one! What would you suggest?
 - D: I think the following does implement the `Parser<Char>` signature:
 
@@ -75,10 +75,12 @@ fun character(needle: Char): Parser<Char> = { input ->
 
 ## Part two: combining parsers
 
+*After a good night sleep our protagonists meet again*  
+
 - G: Hi Daan, are you well rested, ready to go?
 - D: I am well rested, thank you. I was dreaming about parsers. You mentioned that it would be nice to combine them. How does that work?
 
-- G: Well, lets say you have a parser for an 'A' and a parser for a 'B'. You want to have a parser that parses either 'A' or 'B'.
+- G: Well, lets say you have a parser for an `'A'` and a parser for a `'B'`. You want to have a parser that parses either 'A' or 'B'.
 - D: That would be nice. Would this work
 
 ```kotlin
@@ -131,7 +133,7 @@ fun <S, T> and(p: Parser<S>, q: Parser<T>): Parser<Pair<S, T>> = { input ->
 }
 ```
 
-- G: Looking good! But the parser returns a pair, what if you want something else?
+- G: Looking good! But the parser returns a `Pair`, what if you want something else?
 - D: Can we transform it?
 - G: I like how you are thinking! High five!
 - D: I will get to it.
@@ -159,9 +161,9 @@ fun main() {
 
 - D: The result is no longer a `Pair<Char, Char>`, but a `String`! Just as expected!
 - G: What other combinators can you think of?
-- D: Let me see... zero or more occurrences of 'A'?
-- G: That is a good suggestion
-- D: Hmm, let me think of an implementation
+- D: Let me see... zero or more occurrences of `'A'`?
+- G: That is a good suggestion.
+- D: Hmm, let me think of an implementation.
 
 ```kotlin
 fun <T> star(p: Parser<T>): Parser<List<T>> = { input ->
@@ -217,7 +219,7 @@ Exception in thread "main" java.lang.StackOverflowError
 
 - D: Oops! We need a bigger stack!
 - G: No, we should delay the evaluation of the inner star combinator to when we really need it!
-- D: I am puzzled, what do you suggest?
+- D: I am puzzled, what do you mean?
 - G: We can make the evaluation lazy.
 
 ```kotlin
@@ -261,6 +263,8 @@ fun <T> fail(): Parser<T> = { _ ->
 - G: Sure thing!
 
 ## Part three: functional parser
+
+*Both our protagonists went for a walk outside to clear their heads, before coming back to the problem at hand*.
 
 - D: How are you today, Geert?
 - G: Great! Do you want to continue playing around with parser combinators?
@@ -321,7 +325,7 @@ fun main() {
 
 - D: It works like a charm!
 - G: Let's move on to the operators.
-- D: I think have it
+- D: I think I have it
 
 ```kotlin
 fun operator() =
@@ -330,7 +334,7 @@ fun operator() =
 
 - G: Aren't you forgetting something?
 - D: Of course! I should map it to something that we need.
-- G: Exactly
+- G: Exactly.
 - D: Would this work?
 
 ```kotlin
@@ -375,7 +379,7 @@ fun main() {
 
 ## Closing Thoughts
 
-Later the protagonists gathered for a final time.
+*Later the protagonists gathered for a final time*.
 
 - D: Shall I commit this to the repository?
 - G: No!
@@ -383,7 +387,7 @@ Later the protagonists gathered for a final time.
 - G: Although there is nothing wrong with the code we have written, it is not complete nor battle tested.
 - G: You learned a valuable tool, but we should seek a library that fits our needs
 - D: 🤦
-- D: You are right, I got carried away in my enthusiasm.
+- D: You are right, I got curried away in my enthusiasm.
 
 ## Assignments
 The `number` parser in the functional parser section is not complete. It does not parse the valid binary number `0`. Can you fix the `number` parser to accept `0` as well?
