@@ -1,8 +1,10 @@
-Parsing is an important tool in a developers toolbox. However, developers often use sub-par mimicries of actual parsers.
+On the interface of systems data often gets transformed from one form to the other. With the ubiquitous data-format JSON this is often unnoticed. One just includes a library and maybe set some annotations are done.
 
-In this article we will remedy that and introduce the reader with the idea of parser combinators.
+Not always you are as lucky. Sometimes it is necessary to handle data in an unconventional, or ad-hoc, format. Without the crutch of a library to rely on developers need to express in code how to transform one kind of data into an in memory representation of the model the data represents. This is called parsing and it is an important tool in a developers toolbox. However, developers often use sub-par mimicries of actual parsers that barely do the job.
 
-## Part one: a parser
+In this play we will remedy that and introduce the reader to the idea of **parser combinators**. It is best performed in an open office plan to help the germination and spread of the ideas presented here.
+
+## Act one: a parser
 *where our protagonists meet each other behind the keyboard*
 
 - D: Geert, what is a parser actually?
@@ -73,7 +75,7 @@ fun character(needle: Char): Parser<Char> = { input ->
 - D: My head hurts a little, and it's late now, lets get some rest and continue tomorrow?
 - G: Okay! Goodnight!
 
-## Part two: combining parsers
+## Act two: combining parsers
 
 *After a good night sleep our protagonists meet again*  
 
@@ -262,7 +264,7 @@ fun <T> fail(): Parser<T> = { _ ->
 - D: Wow, this combinator-stuff is powerful, but also draining. Can we pick this up again tomorrow?
 - G: Sure thing!
 
-## Part three: functional parser
+## Act three: functional parser
 
 *Both our protagonists went for a walk outside to clear their heads, before coming back to the problem at hand*.
 
