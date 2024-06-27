@@ -1,3 +1,0 @@
-# What to discuss
-* All parse results
-* What titles to use for Part1, part2 ...
