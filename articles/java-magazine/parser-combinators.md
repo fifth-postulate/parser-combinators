@@ -1,8 +1,8 @@
 On the interface of systems data often gets transformed from one form to the other. With the ubiquitous data-format JSON this is often unnoticed. One just includes a library and maybe set some annotations are done.
 
-Not always you are as lucky. Sometimes it is necessary to handle data in an unconventional, or ad-hoc, format. Without the crutch of a library to rely on developers need to express in code how to transform one kind of data into an in memory representation of the model the data represents. This is called parsing and it is an important tool in a developers toolbox. However, developers often use sub-par mimicries of actual parsers that barely do the job.
+You're not always that lucky. Sometimes it is necessary to handle data in an unconventional, or ad-hoc, format. Without the crutch of a library to rely on developers need to express in code how to transform one kind of data into an in-memory representation of the model the data represents. This is called parsing and it is an important tool in a developer's toolbox. However, developers often use sub-par mimicries of actual parsers that barely do the job.
 
-In this play we will remedy that and introduce the reader to the idea of **parser combinators**. It is best performed in an open office plan to help the germination and spread of the ideas presented here.
+In this play, we will remedy that and introduce the reader to the idea of **parser combinators**. It is best performed in an open office plan to help the germination and spread of the ideas presented here.
 
 ## Act one: a parser
 *where our protagonists meet each other behind the keyboard*
@@ -28,7 +28,7 @@ In this play we will remedy that and introduce the reader to the idea of **parse
 - D: How?
 - G: What if we could combine functions with this "parser signature" in a way that they become bigger and better parsers?
 - D: Sounds great! How would we go about that?
-- G: Say a text that starts with a number, but ends with "+10", we would like a next parser to continue where we left of. So we need a way to return this left-over text.
+- G: Say a text that starts with a number, but ends with "+10", we would like the next parser to continue where we left off. So we need a way to return this left-over text.
 - D: So what about this:
 
 ```kotlin
@@ -57,7 +57,7 @@ fun parseA(input: String): Pair<Char, String>? =
     }
 ```
 
-- G: It does! Would it not be great if you can make this more generic?
+- G: It does! Would it not be great if you could make this more generic?
 - D: Do you want to accept the character to match? Like so
 
 ```kotlin
@@ -82,7 +82,7 @@ fun character(needle: Char): Parser<Char> = { input ->
 - G: Hi Daan, are you well rested, ready to go?
 - D: I am well rested, thank you. I was dreaming about parsers. You mentioned that it would be nice to combine them. How does that work?
 
-- G: Well, lets say you have a parser for an `'A'` and a parser for a `'B'`. You want to have a parser that parses either 'A' or 'B'.
+- G: Well, let's say you have a parser for an `'A'` and a parser for a `'B'`. You want to have a parser that parses either 'A' or 'B'.
 - D: That would be nice. Would this work
 
 ```kotlin
@@ -121,7 +121,7 @@ null
 
 - D: It works!
 - G: Whoop whoop!
-- G: If we can do `or` we can do `and`.
+- G: If we can do `OR` we can do `AND`.
 - D: 🤯
 - D: Like this?
 
@@ -386,7 +386,7 @@ fun main() {
 - D: Shall I commit this to the repository?
 - G: No!
 - D: Why not?
-- G: Although there is nothing wrong with the code we have written, it is not complete nor battle tested.
+- G: Although there is nothing wrong with the code we have written, it is not complete nor battle-tested.
 - G: You learned a valuable tool, but we should seek a library that fits our needs
 - D: 🤦
 - D: You are right, I got curried away in my enthusiasm.
