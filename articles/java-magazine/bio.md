@@ -1,3 +1,6 @@
+
+# Bio
+
 ## Geert
 Geert is a prolific software developer who is employed by OpenValue and
 currently works for Alliander. At Alliander Geert is responsible for creating
