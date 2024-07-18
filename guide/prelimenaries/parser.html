@@ -1,0 +1,271 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>What is a Parser - Practical Parsing for Pragmatic Programmers</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../title.html">Parser Combinators</a></li><li class="chapter-item expanded affix "><li class="part-title">Preliminaries</li><li class="chapter-item expanded "><a href="../prelimenaries/languages.html"><strong aria-hidden="true">1.</strong> Languages</a></li><li class="chapter-item expanded "><a href="../prelimenaries/ebnf.html"><strong aria-hidden="true">2.</strong> Grammars and EBNF</a></li><li class="chapter-item expanded "><a href="../prelimenaries/types.html"><strong aria-hidden="true">3.</strong> Types</a></li><li class="chapter-item expanded "><a href="../prelimenaries/style.html"><strong aria-hidden="true">4.</strong> Style</a></li><li class="chapter-item expanded "><a href="../prelimenaries/parser.html" class="active"><strong aria-hidden="true">5.</strong> What is a Parser</a></li><li class="chapter-item expanded affix "><li class="part-title">Workshop</li><li class="chapter-item expanded "><a href="../work/succeed.html"><strong aria-hidden="true">6.</strong> Succeed and friends</a></li><li class="chapter-item expanded "><a href="../work/A.html"><strong aria-hidden="true">7.</strong> Parse an 'A'</a></li><li class="chapter-item expanded "><a href="../work/character.html"><strong aria-hidden="true">8.</strong> Parse any character</a></li><li class="chapter-item expanded "><a href="../work/token.html"><strong aria-hidden="true">9.</strong> Parse a token</a></li><li class="chapter-item expanded "><a href="../work/predicate.html"><strong aria-hidden="true">10.</strong> Parse a predicate</a></li><li class="chapter-item expanded "><a href="../work/orThat.html"><strong aria-hidden="true">11.</strong> Parse this or that</a></li><li class="chapter-item expanded "><a href="../work/andThen.html"><strong aria-hidden="true">12.</strong> Parse this and that</a></li><li class="chapter-item expanded "><a href="../work/just.html"><strong aria-hidden="true">13.</strong> Just all</a></li><li class="chapter-item expanded "><a href="../work/map.html"><strong aria-hidden="true">14.</strong> Transform a result</a></li><li class="chapter-item expanded "><a href="../work/lazy.html"><strong aria-hidden="true">15.</strong> Being lazy</a></li><li class="chapter-item expanded "><a href="../work/many.html"><strong aria-hidden="true">16.</strong> Parse many things</a></li><li class="chapter-item expanded affix "><li class="part-title">Utilities</li><li class="chapter-item expanded "><a href="../utilities/why.html"><strong aria-hidden="true">17.</strong> It does not end here</a></li><li class="chapter-item expanded "><a href="../utilities/ignore.html"><strong aria-hidden="true">18.</strong> Ignore the result</a></li><li class="chapter-item expanded "><a href="../utilities/first.html"><strong aria-hidden="true">19.</strong> Commit to the first result</a></li><li class="chapter-item expanded "><a href="../utilities/greedy.html"><strong aria-hidden="true">20.</strong> Greedy parsing</a></li><li class="chapter-item expanded "><a href="../utilities/consecutive.html"><strong aria-hidden="true">21.</strong> Consecutive parsers</a></li><li class="chapter-item expanded "><a href="../utilities/oneof.html"><strong aria-hidden="true">22.</strong> Oneof the following parsers</a></li><li class="chapter-item expanded "><a href="../utilities/whitespace.html"><strong aria-hidden="true">23.</strong> Whitespace</a></li><li class="chapter-item expanded "><a href="../utilities/pack.html"><strong aria-hidden="true">24.</strong> Packing parser</a></li><li class="chapter-item expanded "><a href="../utilities/separating.html"><strong aria-hidden="true">25.</strong> Separating parser</a></li><li class="chapter-item expanded affix "><li class="part-title">Projects</li><li class="chapter-item expanded "><a href="../project/instructions.html"><strong aria-hidden="true">26.</strong> How to use it</a></li><li class="chapter-item expanded "><a href="../project/list.html"><strong aria-hidden="true">27.</strong> List of things</a></li><li class="chapter-item expanded "><a href="../project/parens.html"><strong aria-hidden="true">28.</strong> Balanced parentheses</a></li><li class="chapter-item expanded "><a href="../project/template.html"><strong aria-hidden="true">29.</strong> Template Language</a></li><li class="chapter-item expanded "><a href="../project/expression.html"><strong aria-hidden="true">30.</strong> Aritmetic Expression</a></li><li class="chapter-item expanded affix "><li class="part-title">Appendices</li><li class="chapter-item expanded "><a href="../appendix/solutions.html"><strong aria-hidden="true">31.</strong> Solutions</a></li><li class="chapter-item expanded "><a href="../appendix/sources.html"><strong aria-hidden="true">32.</strong> Sources</a></li><li class="chapter-item expanded "><a href="../appendix/mediography.html"><strong aria-hidden="true">33.</strong> Mediography</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Practical Parsing for Pragmatic Programmers</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="what-is-a-parser"><a class="header" href="#what-is-a-parser">What is a Parser</a></h1>
+<p>Before we start out creating a parser combinator framework, it is good to consider the question</p>
+<blockquote>
+<p>What is a parser?</p>
+</blockquote>
+<p>In this workshop a parser is a "function" that takes as input a <code>string</code> that describes some structure, and returns a representation of that structure in memory.</p>
+<p>For example, say that we are handed the string <code>"37"</code>. If we are told that the string contains a description of an integer, we might wan to use a parser to turn that description into an actual integer. I.e. the integer <code>37</code>.</p>
+<p>There is a problem though. What if we are told that the input contains a description of an integer in base 10 and we are handed the string <code>"teapot"</code>? Even with the best will in the world, it is impossible for a parser to turn <code>"teapot"</code> into an integer in a meaningfull way.</p>
+<p>So we need a way for parsers to signal that they could fail.</p>
+<h2 id="signature"><a class="header" href="#signature">Signature</a></h2>
+<p>We need a way to distuingish between a parser that fails and a parser that succeeds. We will use a list for that. If a parser fails we return an empty list. If a parser succeeds we return a non-empty list. But what should we return in the list?</p>
+<h3 id="first-thought"><a class="header" href="#first-thought">First thought</a></h3>
+<p>As a first thought you might guess that we should return the structure for which the input is a description. This would work in the example above. Unfortunatly, that choice is not very composable.</p>
+<p>For this to make sense we have to understand our overal goal. What we would like is to create complex parsers that our build up from simpler parsers. But how would you combine simpler parser if your parser returns just the success or failure of parsing a certain structure? The complex parser would than have to keep track of how many characters are consumed.</p>
+<p>Keeping track of the which part of the input is consumed is tedious, especially if it has to be done anew for each parser we create.</p>
+<h3 id="second-thought"><a class="header" href="#second-thought">Second thought</a></h3>
+<p>An other option is to not only return the structure, but also the part of the input that is unprocessed. For example, say that we have an input that represents a tuple of a age and a name. I.e. <code>"41 daan"</code>. We could use our parser that parses an integer for the age part. If it only returned the integer, it would be hard to combine with other parsers.</p>
+<p>Instead if the integer parser would return <code>[(41, " daan")]</code>, an other parser could pick up where the integer parser left off.</p>
+<h3 id="final-form"><a class="header" href="#final-form">Final Form</a></h3>
+<p>So the final form of our parser is as follows. It is a function that accepts a <code>string</code> and returns a list of pairs. The first component of the pair is the structure that the parser has parsed, the second component of the pair is the remaining part of the input.</p>
+<p>The above sentence can be succintly described by the type for a parser</p>
+<blockquote>
+<p>string -&gt; [(T, string)]</p>
+</blockquote>
+<h2 id="caveats"><a class="header" href="#caveats">Caveats</a></h2>
+<p>There are a lot of caveats in the above "definition" and we will discuss some of them here. Some others are discussed in the exercises. And there are probably some that we aren't even aware of. So don't hesitate to come and discuss them with us.</p>
+<h3 id="function"><a class="header" href="#function">"Function"</a></h3>
+<p>We have put the term <em>function</em> in quotes. The reason for this is that we are not in control of which programming language you use. You are free to use any language you like.</p>
+<p>Some language have functions as first class citizen. You are in luck if you are using such a language. You could use actual functions as parsers.</p>
+<p>If the language of your choice does not have good support for functions, don't worry. You could mimic the technique in this workshop. It might be a bit verbose at some points, but the ideas are still worthwhile.</p>
+<h3 id="returning-list"><a class="header" href="#returning-list">Returning List</a></h3>
+<p>We opted to have a list as return type. This is a choice and you could take a different route here.</p>
+<p>The choice isn't without thought. One of the first descriptions of parser combinators also used list in their return type. This allows to signal failure to parse with an empty list and to signal success with a singleton list.</p>
+<p>But other possibilities are open to us as well. For example, it allows one to return multiple succesfull results. This is helpfull when the grammar is ambiguous. Instead of working hard to remove the ambiguity in the grammar or in the implementation, we just return all possible parsings.</p>
+<h3 id="error-information"><a class="header" href="#error-information">Error information</a></h3>
+<p>A good parser would also provide hints on what went wrong. The minimum of good error reporting is the row and column information of where the parser got stuck.</p>
+<p>We will not concentrate on error reporting in this workshop. There are some hints in the exercises how one could handle this.</p>
+<h2 id="exercises"><a class="header" href="#exercises">Exercises</a></h2>
+<ol>
+<li>What is the smallest base in which <code>"teapot"</code> could be a description of a valid integer? Assume that 'a' corresponds with 10, 'b' with 11 etcetera.</li>
+<li>If your language of choice does not support first class functions, how could you remedy that? Discuss your ideas with a participant or the guides.</li>
+<li>How would you model the success and failure states of a parser?</li>
+<li>How would you enrich the return type to fascilitate error reporting?</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../prelimenaries/style.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../work/succeed.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../prelimenaries/style.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../work/succeed.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

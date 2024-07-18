@@ -1,0 +1,1084 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Practical Parsing for Pragmatic Programmers</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title.html">Parser Combinators</a></li><li class="chapter-item expanded affix "><li class="part-title">Preliminaries</li><li class="chapter-item expanded "><a href="prelimenaries/languages.html"><strong aria-hidden="true">1.</strong> Languages</a></li><li class="chapter-item expanded "><a href="prelimenaries/ebnf.html"><strong aria-hidden="true">2.</strong> Grammars and EBNF</a></li><li class="chapter-item expanded "><a href="prelimenaries/types.html"><strong aria-hidden="true">3.</strong> Types</a></li><li class="chapter-item expanded "><a href="prelimenaries/style.html"><strong aria-hidden="true">4.</strong> Style</a></li><li class="chapter-item expanded "><a href="prelimenaries/parser.html"><strong aria-hidden="true">5.</strong> What is a Parser</a></li><li class="chapter-item expanded affix "><li class="part-title">Workshop</li><li class="chapter-item expanded "><a href="work/succeed.html"><strong aria-hidden="true">6.</strong> Succeed and friends</a></li><li class="chapter-item expanded "><a href="work/A.html"><strong aria-hidden="true">7.</strong> Parse an 'A'</a></li><li class="chapter-item expanded "><a href="work/character.html"><strong aria-hidden="true">8.</strong> Parse any character</a></li><li class="chapter-item expanded "><a href="work/token.html"><strong aria-hidden="true">9.</strong> Parse a token</a></li><li class="chapter-item expanded "><a href="work/predicate.html"><strong aria-hidden="true">10.</strong> Parse a predicate</a></li><li class="chapter-item expanded "><a href="work/orThat.html"><strong aria-hidden="true">11.</strong> Parse this or that</a></li><li class="chapter-item expanded "><a href="work/andThen.html"><strong aria-hidden="true">12.</strong> Parse this and that</a></li><li class="chapter-item expanded "><a href="work/just.html"><strong aria-hidden="true">13.</strong> Just all</a></li><li class="chapter-item expanded "><a href="work/map.html"><strong aria-hidden="true">14.</strong> Transform a result</a></li><li class="chapter-item expanded "><a href="work/lazy.html"><strong aria-hidden="true">15.</strong> Being lazy</a></li><li class="chapter-item expanded "><a href="work/many.html"><strong aria-hidden="true">16.</strong> Parse many things</a></li><li class="chapter-item expanded affix "><li class="part-title">Utilities</li><li class="chapter-item expanded "><a href="utilities/why.html"><strong aria-hidden="true">17.</strong> It does not end here</a></li><li class="chapter-item expanded "><a href="utilities/ignore.html"><strong aria-hidden="true">18.</strong> Ignore the result</a></li><li class="chapter-item expanded "><a href="utilities/first.html"><strong aria-hidden="true">19.</strong> Commit to the first result</a></li><li class="chapter-item expanded "><a href="utilities/greedy.html"><strong aria-hidden="true">20.</strong> Greedy parsing</a></li><li class="chapter-item expanded "><a href="utilities/consecutive.html"><strong aria-hidden="true">21.</strong> Consecutive parsers</a></li><li class="chapter-item expanded "><a href="utilities/oneof.html"><strong aria-hidden="true">22.</strong> Oneof the following parsers</a></li><li class="chapter-item expanded "><a href="utilities/whitespace.html"><strong aria-hidden="true">23.</strong> Whitespace</a></li><li class="chapter-item expanded "><a href="utilities/pack.html"><strong aria-hidden="true">24.</strong> Packing parser</a></li><li class="chapter-item expanded "><a href="utilities/separating.html"><strong aria-hidden="true">25.</strong> Separating parser</a></li><li class="chapter-item expanded affix "><li class="part-title">Projects</li><li class="chapter-item expanded "><a href="project/instructions.html"><strong aria-hidden="true">26.</strong> How to use it</a></li><li class="chapter-item expanded "><a href="project/list.html"><strong aria-hidden="true">27.</strong> List of things</a></li><li class="chapter-item expanded "><a href="project/parens.html"><strong aria-hidden="true">28.</strong> Balanced parentheses</a></li><li class="chapter-item expanded "><a href="project/template.html"><strong aria-hidden="true">29.</strong> Template Language</a></li><li class="chapter-item expanded "><a href="project/expression.html"><strong aria-hidden="true">30.</strong> Aritmetic Expression</a></li><li class="chapter-item expanded affix "><li class="part-title">Appendices</li><li class="chapter-item expanded "><a href="appendix/solutions.html"><strong aria-hidden="true">31.</strong> Solutions</a></li><li class="chapter-item expanded "><a href="appendix/sources.html"><strong aria-hidden="true">32.</strong> Sources</a></li><li class="chapter-item expanded "><a href="appendix/mediography.html"><strong aria-hidden="true">33.</strong> Mediography</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Practical Parsing for Pragmatic Programmers</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="parser-combinators"><a class="header" href="#parser-combinators">Parser Combinators</a></h1>
+<h2 id="practical-parsing-for-pragmatic-programmers"><a class="header" href="#practical-parsing-for-pragmatic-programmers">Practical Parsing for Pragmatic Programmers</a></h2>
+<p>You are looking at the guide accompanying a workshop about <a href="https://en.wikipedia.org/wiki/Parser_combinator"><em>parser combinators</em></a>.</p>
+<p>Parser combinators is an interesting topic that allows a developer to parse complex input into rich data-structures in a modular fashion. This form of parsing is possible in any language that supports <a href="https://en.wikipedia.org/wiki/Higher-order_function"><em>higher order functions</em></a>. Luckily that includes a lot of languages, like Java, Python, JavaScript and many more.</p>
+<p>We believe in learning by doing, so you can expect to be asked to open your favourite editor or integrated development environment and gain first-hand practical experience with <em>parser combinators</em>, by following along this guide. Exercises along the way help cement your new found knowledge making <em>parser combinators</em> a valuable tool in your toolkit.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="languages"><a class="header" href="#languages">Languages</a></h1>
+<p>When we are studying the topic of parsing, it is inevitable to discuss <em>languages</em>. There is a large body of work on <a href="https://en.wikipedia.org/wiki/Formal_language"><em>formal languages</em></a> and ways to work with them. The reason for this is that programming languages are examples of formal languages. Knowing how to efficiently transform a member of one programming language into instructions for a computer is what a compiler does.</p>
+<h2 id="definition"><a class="header" href="#definition">Definition</a></h2>
+<p>For our use case it is enough to have working knowledge about languages. In this workshop we will be a bit vague and define a language as follows.</p>
+<blockquote>
+<p>A <em>language</em> is any collection of strings.</p>
+</blockquote>
+<p>An element in a language is called a <em>word</em>.</p>
+<p>Some examples of languages are</p>
+<ul>
+<li>The language consisting of the authors names: <code>{"daan", "geert"}</code>.</li>
+<li>The language consisting of one of the authors childrens names: <code>{"sophie", "robin", "hannah"}</code>.</li>
+<li>The language of all english words: <code>{"ape", "avacado", ... }</code>.</li>
+<li>The language of words solely consisting of any number of <code>'a'</code>s: <code>{"", "a", "aa", "aaa", ... }</code>.</li>
+</ul>
+<h2 id="categories"><a class="header" href="#categories">Categories</a></h2>
+<p>There are languages in all shapes and sizes. Some languages are finite, such as the language consisting of the authors names. Other languages are infinite.</p>
+<p>Some languages have a lot of structure which can be captured in a <em>grammar</em>, which will be the subject of our next chapter.</p>
+<h2 id="exercises"><a class="header" href="#exercises">Exercises</a></h2>
+<ol>
+<li>Give your own example of a language.</li>
+<li>It the English language finite or infinite? What about other natural languages?</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="grammars-and-ebnf"><a class="header" href="#grammars-and-ebnf">Grammars and EBNF</a></h1>
+<p>Before diving in EBNF (Extended Backus-Naur Form), we need to have a simple understanding on grammars.</p>
+<h2 id="grammars"><a class="header" href="#grammars">Grammars</a></h2>
+<p>A grammar is a set of rules a language adheres to. Commonly languages can be described by grammars, natural languages
+(e.g. Dutch or English) but also computer languages (Java, Haskell, etc.). The rules for computer languages are
+stricter than the rules for natural languages. In general computer languages don't allow for ambiguities whereas
+natural languages are filled with ambiguities.</p>
+<p>A grammar for a computer language (from now on just <em>language</em>) is normally described using EBNF.</p>
+<h2 id="ebnf"><a class="header" href="#ebnf">EBNF</a></h2>
+<p>EBNF (<em>Extended Backus-Naur Form</em>) is a way to describe a grammar. For example:</p>
+<pre><code>non zero digit ::= "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
+digit ::= "0" | non zero digit ;
+natural number ::= non zero digit digit* ;
+integer ::= "0" | "-"? natural number ;
+</code></pre>
+<p>This can be interpreted as follows.</p>
+<ul>
+<li>A <strong>non zero digit</strong> is a <em>1</em> <code>or</code> a <em>2</em> <code>or</code> a <em>3</em> <code>or</code> ... <em>9</em></li>
+<li>A <strong>digit</strong> is a <em>0</em> <code>or</code> a <strong>non zero digit</strong></li>
+<li>A <strong>natural number</strong> is a <strong>non zero digit</strong> <code>concatenated</code> with a <code>repetition</code> of <strong>digit</strong>s</li>
+<li>An <strong>integer</strong> is a <em>0</em> <code>or</code> an <code>optional</code> <em>-</em> <code>concatenated</code> with a <strong>natural number</strong></li>
+</ul>
+<p>Someone familiar with regular expressions might recognise the following operators:</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Operator</th><th style="text-align: left">Meaning</th></tr></thead><tbody>
+<tr><td style="text-align: left">* (Kleene star)</td><td style="text-align: left">0 or more occurrences</td></tr>
+<tr><td style="text-align: left">+ (Kleene cross)</td><td style="text-align: left">1 or more occurrences</td></tr>
+<tr><td style="text-align: left">?</td><td style="text-align: left">0 or 1 occurrences</td></tr>
+<tr><td style="text-align: left">( ) (parentheses)</td><td style="text-align: left">grouping</td></tr>
+<tr><td style="text-align: left">invisible</td><td style="text-align: left">concatenation</td></tr>
+</tbody></table>
+</div>
+<h2 id="exercises-1"><a class="header" href="#exercises-1">Exercises</a></h2>
+<ol>
+<li>Write a grammar for a simple expression e.g. addition only</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="types"><a class="header" href="#types">Types</a></h1>
+<p>Not every programming language is the same. Among the characteristics in which programming languages can differ, we will highlight types in this section.</p>
+<h2 id="type-system"><a class="header" href="#type-system">Type System</a></h2>
+<p>A <a href="https://en.wikipedia.org/wiki/Type_system"><em>type system</em></a> is</p>
+<blockquote>
+<p>a logical system comprising a set of rules that assigns a property called a type to the various constructs of a computer program, such as variables, expressions, functions or modules.</p>
+</blockquote>
+<p>which isn't really helpful, if you don't already know what a type is.</p>
+<p>One could say that types are used to prevent certain mistakes. For example, a type system could prevent the addition of a number with a string, something that does not make sense in every situation. If you want to know more about types and how they are used we recommend <a href="https://www.cis.upenn.edu/~bcpierce/tapl/"><em>Types and Programming Languages</em></a> by Benjamin Pierce.</p>
+<p>Not every programming language uses types, and the programming languages that do aren't always explicit about it. Even though this workshop is language agnostic, meaning that we don't use a concrete language to express the ideas, we can benefit from discussing types.</p>
+<p>In order to fascilitate the discussion we will introduce a type notation. This is a description of a certain type.</p>
+<h2 id="notation"><a class="header" href="#notation">Notation</a></h2>
+<p>In order get start the discussion we need to be able to express certain base types. Since we are talking a lot about languages, which are just a collection of <em>string</em>s we are going to include those in are notation.</p>
+<h3 id="base"><a class="header" href="#base">Base</a></h3>
+<p>The notation for base types include <code>string</code>, <code>integer</code>, <code>boolean</code> etcetera. These will form building blocks for more complex types. The are written with all lower-case letters.</p>
+<h3 id="type-variables"><a class="header" href="#type-variables">Type Variables</a></h3>
+<p>Sometimes we need a type, but aren't interested in which concrete type it is. We will use <em>type variables</em> for that. For example <code>T</code> is a type variable. It could be a <code>string</code>, <code>integer</code> or any other type. The are written with a starting capital letter. Often we will use a single letter. When we want to convey intent on how the type is used we could use words.</p>
+<h3 id="functions"><a class="header" href="#functions">Functions</a></h3>
+<p>Functions are important and we will want to discuss them and their types. For example, the length of a string is a function. It accepts an argument of type <code>string</code> and return a value of type <code>integer</code>. We denote the type of the length function with <code>string -&gt; integer</code>.</p>
+<p>In general if we have types <code>S</code> and <code>T</code>, a functions that maps values of type <code>S</code> into values of type <code>T</code> is denoted by <code>S -&gt; T</code>.</p>
+<h3 id="pair"><a class="header" href="#pair">Pair</a></h3>
+<p>We sometimes want to combine to pieces of information. For example, you could keep track of your age. At the moment that would be <code>("daan", 41)</code>. Notice that the first part is a value of type <code>string</code>. The second part is a value of type <code>integer</code>. The pair has type <code>(string, integer)</code>.</p>
+<p>For types <code>S</code> and <code>T</code>, the type of a pair of these values is denoted by <code>(S, T)</code>.</p>
+<h3 id="list"><a class="header" href="#list">List</a></h3>
+<p>Sometimes we want discuss lists of things. An example would be a list of the names of your friends. The type of a list of <code>string</code>s is denoted by <code>[string]</code>.</p>
+<p>We can generalize that for an arbitrary type <code>T</code>. A list of <code>T</code>s is denoted by <code>[T]</code>.</p>
+<h3 id="summary"><a class="header" href="#summary">Summary</a></h3>
+<p>In order to clearly express our thoughts we introduce types. There is a concrete notation to denote type, which consist of the following rules.</p>
+<ol>
+<li>We have some basic types like <code>string</code>, <code>integer</code>, etcetera.</li>
+<li>For a type variable <code>T</code>, we denote lists of <code>T</code> as <code>[T]</code>.</li>
+<li>For type variables <code>S</code> and <code>T</code>, a pair of <code>S</code> and <code>T</code> is denoted with <code>(S, T)</code>.</li>
+<li>For type variables <code>S</code> and <code>T</code>, a function is denoted by <code>S -&gt; T</code>.</li>
+</ol>
+<h2 id="exercises-2"><a class="header" href="#exercises-2">Exercises</a></h2>
+<ol>
+<li>Describe the following type in your own words.</li>
+</ol>
+<pre><code class="language-plain">string -&gt; [(string,integer)]
+</code></pre>
+<ol start="2">
+<li>The function that counts the occurences of a certain character in a string could be denoted by <code>(string, character) -&gt; integer</code>. A different view of this function is would be <code>string -&gt; character -&gt; integer</code>. This can be read as a function that accepts as argument a value of type <code>string</code> and returns a function of type <code>character -&gt; integer</code>.</li>
+</ol>
+<p>The process is called <a href="https://en.wikipedia.org/wiki/Currying"><em>Currying</em></a> after the computer scientist Haskell Curry.</p>
+<p>What is the type of the curried function type <code>(S, T) -&gt; U</code>?</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="style"><a class="header" href="#style">Style</a></h1>
+<p>There are various programming languages, each with their own style or <a href="https://en.wikipedia.org/wiki/Programming_paradigm"><em>paradigm</em></a>.</p>
+<p>For this workshop it is not particularly important which style to use. The important property is that one should be able to create complex constructs from simpler building blocks.</p>
+<p>This can be done in the <em>object oriented style</em> by composing objects. In a <em>functional style</em> one would compose functions.</p>
+<p>We leave it at your own discretion how best to implement the ideas in this workshop. That does not mean that you are on your own. There is always room to discuss your ideas with other participants or with the workshop guide before commiting to a certain style.</p>
+<h2 id="exercises-3"><a class="header" href="#exercises-3">Exercises</a></h2>
+<ol>
+<li>What is your favorite programming language and what style does it use?</li>
+<li>What styles do you like?</li>
+<li>What style are you going to use for the workshop?</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="what-is-a-parser"><a class="header" href="#what-is-a-parser">What is a Parser</a></h1>
+<p>Before we start out creating a parser combinator framework, it is good to consider the question</p>
+<blockquote>
+<p>What is a parser?</p>
+</blockquote>
+<p>In this workshop a parser is a "function" that takes as input a <code>string</code> that describes some structure, and returns a representation of that structure in memory.</p>
+<p>For example, say that we are handed the string <code>"37"</code>. If we are told that the string contains a description of an integer, we might wan to use a parser to turn that description into an actual integer. I.e. the integer <code>37</code>.</p>
+<p>There is a problem though. What if we are told that the input contains a description of an integer in base 10 and we are handed the string <code>"teapot"</code>? Even with the best will in the world, it is impossible for a parser to turn <code>"teapot"</code> into an integer in a meaningfull way.</p>
+<p>So we need a way for parsers to signal that they could fail.</p>
+<h2 id="signature"><a class="header" href="#signature">Signature</a></h2>
+<p>We need a way to distuingish between a parser that fails and a parser that succeeds. We will use a list for that. If a parser fails we return an empty list. If a parser succeeds we return a non-empty list. But what should we return in the list?</p>
+<h3 id="first-thought"><a class="header" href="#first-thought">First thought</a></h3>
+<p>As a first thought you might guess that we should return the structure for which the input is a description. This would work in the example above. Unfortunatly, that choice is not very composable.</p>
+<p>For this to make sense we have to understand our overal goal. What we would like is to create complex parsers that our build up from simpler parsers. But how would you combine simpler parser if your parser returns just the success or failure of parsing a certain structure? The complex parser would than have to keep track of how many characters are consumed.</p>
+<p>Keeping track of the which part of the input is consumed is tedious, especially if it has to be done anew for each parser we create.</p>
+<h3 id="second-thought"><a class="header" href="#second-thought">Second thought</a></h3>
+<p>An other option is to not only return the structure, but also the part of the input that is unprocessed. For example, say that we have an input that represents a tuple of a age and a name. I.e. <code>"41 daan"</code>. We could use our parser that parses an integer for the age part. If it only returned the integer, it would be hard to combine with other parsers.</p>
+<p>Instead if the integer parser would return <code>[(41, " daan")]</code>, an other parser could pick up where the integer parser left off.</p>
+<h3 id="final-form"><a class="header" href="#final-form">Final Form</a></h3>
+<p>So the final form of our parser is as follows. It is a function that accepts a <code>string</code> and returns a list of pairs. The first component of the pair is the structure that the parser has parsed, the second component of the pair is the remaining part of the input.</p>
+<p>The above sentence can be succintly described by the type for a parser</p>
+<blockquote>
+<p>string -&gt; [(T, string)]</p>
+</blockquote>
+<h2 id="caveats"><a class="header" href="#caveats">Caveats</a></h2>
+<p>There are a lot of caveats in the above "definition" and we will discuss some of them here. Some others are discussed in the exercises. And there are probably some that we aren't even aware of. So don't hesitate to come and discuss them with us.</p>
+<h3 id="function"><a class="header" href="#function">"Function"</a></h3>
+<p>We have put the term <em>function</em> in quotes. The reason for this is that we are not in control of which programming language you use. You are free to use any language you like.</p>
+<p>Some language have functions as first class citizen. You are in luck if you are using such a language. You could use actual functions as parsers.</p>
+<p>If the language of your choice does not have good support for functions, don't worry. You could mimic the technique in this workshop. It might be a bit verbose at some points, but the ideas are still worthwhile.</p>
+<h3 id="returning-list"><a class="header" href="#returning-list">Returning List</a></h3>
+<p>We opted to have a list as return type. This is a choice and you could take a different route here.</p>
+<p>The choice isn't without thought. One of the first descriptions of parser combinators also used list in their return type. This allows to signal failure to parse with an empty list and to signal success with a singleton list.</p>
+<p>But other possibilities are open to us as well. For example, it allows one to return multiple succesfull results. This is helpfull when the grammar is ambiguous. Instead of working hard to remove the ambiguity in the grammar or in the implementation, we just return all possible parsings.</p>
+<h3 id="error-information"><a class="header" href="#error-information">Error information</a></h3>
+<p>A good parser would also provide hints on what went wrong. The minimum of good error reporting is the row and column information of where the parser got stuck.</p>
+<p>We will not concentrate on error reporting in this workshop. There are some hints in the exercises how one could handle this.</p>
+<h2 id="exercises-4"><a class="header" href="#exercises-4">Exercises</a></h2>
+<ol>
+<li>What is the smallest base in which <code>"teapot"</code> could be a description of a valid integer? Assume that 'a' corresponds with 10, 'b' with 11 etcetera.</li>
+<li>If your language of choice does not support first class functions, how could you remedy that? Discuss your ideas with a participant or the guides.</li>
+<li>How would you model the success and failure states of a parser?</li>
+<li>How would you enrich the return type to fascilitate error reporting?</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="succeed-and-friends"><a class="header" href="#succeed-and-friends">Succeed and Friends</a></h1>
+<p>So we have established a signature for our parser</p>
+<pre><code>string -&gt; [(T, string)]
+</code></pre>
+<p>In other words: a parser is a function that accepts a string and returns a list of pairs. Each pair in the list is a combination of a value of type <code>T</code> and a string, which is the remaining input.</p>
+<p>What would the simplest parser be?</p>
+<h2 id="succeed"><a class="header" href="#succeed"><code>succeed</code></a></h2>
+<p>One of the simplest parser would not bother with the input and instead return a value we provide.</p>
+<p>Thinking hard about the signature we could come up with</p>
+<pre><code>T -&gt; string -&gt; [(T, string)]
+</code></pre>
+<p>Let's break this signature down. There are some arrows involved so this is a function. The part after the first arrow is the same as the signature for our parser.</p>
+<p>So this is a function that accepts an argument of type <code>T</code> and returns the parser.</p>
+<p>Below you can find some examples of how we would use succeed</p>
+<div class="table-wrapper"><table><thead><tr><th>input</th><th><em>succeed(37)</em></th></tr></thead><tbody>
+<tr><td>"whatever"</td><td>[(37, "whatever")]</td></tr>
+<tr><td>"input"</td><td>[(37, "input")]</td></tr>
+<tr><td>"ABC"</td><td>[(37, "ABC")]</td></tr>
+</tbody></table>
+</div>
+<p>With succeed under our belt, we can go on to an other simple parser. One could argue that it is even simpler then <code>succeed</code>.</p>
+<h2 id="fail"><a class="header" href="#fail"><code>fail</code></a></h2>
+<p>Some parsers fail to turn the input into a meaningfull structure. <code>fail</code> is the quintessential example. It fails on any input, whatever that is.</p>
+<p>Here are some examples.</p>
+<div class="table-wrapper"><table><thead><tr><th>input</th><th><em>fail()</em></th></tr></thead><tbody>
+<tr><td>"whatever"</td><td>[]</td></tr>
+<tr><td>"input</td><td>[]</td></tr>
+<tr><td>"ABC"</td><td>[]</td></tr>
+</tbody></table>
+</div>
+<h2 id="why-these-parsers"><a class="header" href="#why-these-parsers">Why these parsers?</a></h2>
+<p>The <code>succeed</code> and <code>fail</code> parser seem very simple. Certainly they can not have practical use, other then introducing you to the idea of parsers.</p>
+<p>Although <code>succeed</code> and <code>fail</code> are simple parsers, the are powerful none the less. It can seem that these parsers would not amount to anything, but within a few chapters they allow you to wield tremendous power.</p>
+<p>So don't dismiss them just yet, they will come in handy rather sooner then later.</p>
+<h2 id="exercises-5"><a class="header" href="#exercises-5">Exercises</a></h2>
+<ol>
+<li>Provide your own example to cement your understanding of <code>succeed</code>. Discuss your example with somebody.</li>
+<li>Implement the <code>succeed</code> function in your language of choice. You will have to choose how to represent functions.</li>
+<li>Make sure you are confident your implementation works as expected. You could write tests, use a read-eval-print-loop (REPL) or any other means to check.</li>
+<li>What is the type of the <code>fail</code> function?</li>
+<li>Implement <code>fail</code> and test your implementation.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="character-a"><a class="header" href="#character-a">character <code>A</code></a></h1>
+<p>One of the simplest parsers that depends on any input to parse is a parser that succeeds if the input starts with the character <code>'A'</code>.</p>
+<p>For example, <em>parserA</em> is a parser that succeeds if the input starts with the character <code>'A'</code>. Below we summarize our expectation for <em>parserA</em>.</p>
+<div class="table-wrapper"><table><thead><tr><th>input</th><th><em>parserA()</em></th></tr></thead><tbody>
+<tr><td>"ABC"</td><td>[("A", "BC")]</td></tr>
+<tr><td>"BC"</td><td>[]</td></tr>
+<tr><td>"aBC"</td><td>[]</td></tr>
+</tbody></table>
+</div>
+<h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
+<p>Below you can find some pseudo code for the <code>parserA</code> function.</p>
+<p>The implementation of the <code>parserA</code> function relies on the capabilities of your language to work with <code>string</code>. Here we assume that your language can tell you when a certain string start with an other character. See the exercises for some pointers on how to solve the problem if your language does not provide such functionality.</p>
+<pre><code>parserA() =
+    input =&gt; if input.startsWith('A') then
+                [("A", input[1:])]
+             else
+                []
+</code></pre>
+<p>Here <code>input[1:]</code> means the rest of the input starting with the <em>second</em> character, since our lists indices are zero-based. People familiar with Python will feel comfortable with this notation.</p>
+<h2 id="exercises-6"><a class="header" href="#exercises-6">Exercises</a></h2>
+<ol>
+<li>What is the type of <code>parserA</code>?</li>
+<li>Implement <code>parserA</code> in your favorite language. From now on, implement will also mean verify your implementation.</li>
+<li>If your language does not have a <code>startsWith</code> function for <code>string</code> how would you implement it? What tools are provided for working with <code>string</code>?</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="any-character"><a class="header" href="#any-character">Any character</a></h1>
+<p>The work we have done for the parsing of a character <code>'A'</code>, could also be done for other characters.</p>
+<p>One could copy the implementation of <em>parserA</em> and change it into a <em>parserB</em>, a <em>parserC</em> or a <em>parser^</em> for that matter.</p>
+<p>Instead we will define a <em>character</em> function that accepts the character to parse as an argument.</p>
+<p>That is, <em>character</em> is a parser that accepts a character as argument and returns a parser that succeeds if the input starts with that character. Below we summarize our expectation for <em>character</em>.</p>
+<div class="table-wrapper"><table><thead><tr><th>input</th><th>char</th><th><em>character(char)</em></th></tr></thead><tbody>
+<tr><td>"ABC"</td><td>'A'</td><td>[("A", "BC")]</td></tr>
+<tr><td>"BC"</td><td>'A'</td><td>[]</td></tr>
+<tr><td>"aBC"</td><td>'A'</td><td>[]</td></tr>
+<tr><td>"aBC"</td><td>'a'</td><td>[("a", "BC")]</td></tr>
+</tbody></table>
+</div>
+<h2 id="implementation-1"><a class="header" href="#implementation-1">Implementation</a></h2>
+<p>The implementation of the <code>character</code> function has a lot in common with <code>parserA</code>.</p>
+<pre><code>character(char) =
+    input =&gt; if input.startsWith(char) then
+                [(char.toString(), input[1:])]
+             else
+                []
+</code></pre>
+<h2 id="exercises-7"><a class="header" href="#exercises-7">Exercises</a></h2>
+<ol>
+<li>What is the type of the <code>character</code> function?</li>
+<li>Implement the <code>character</code> function.</li>
+<li>Implement <code>parserA</code> in terms of <code>character</code>. This is a common practice in this workshop. When you notice a common pattern in parsers, generalize it.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="parse-a-token"><a class="header" href="#parse-a-token">Parse a token</a></h1>
+<p>Instead of parsing a single character, we could try to parse a word or <em>token</em>.</p>
+<p>Assume we want to know if an input starts with a name, for example <code>"Geert"</code>. But you yourself could be interested in a different name. So we would like to create a function that accepts a token and returns a parser that accepts input whenever it starts with that token.</p>
+<p>Below you find some expectations we have for the <code>token</code> parser.</p>
+<div class="table-wrapper"><table><thead><tr><th>input</th><th>t</th><th><em>token(t)</em></th></tr></thead><tbody>
+<tr><td>"Geert is a father"</td><td>"Geert"</td><td>[("Geert", " is a father")]</td></tr>
+<tr><td>"if a == 1 then 1 else 2"</td><td>"if"</td><td>[("if", " a == 1 then 1 else 2")]</td></tr>
+<tr><td>"Daan is a father"</td><td>"Geert"</td><td>[]</td></tr>
+<tr><td>"while a == 1 do nothing"</td><td>"if"</td><td>[]</td></tr>
+</tbody></table>
+</div>
+<h2 id="implementation-2"><a class="header" href="#implementation-2">Implementation</a></h2>
+<p>The implementation of <code>token</code> is very similar to the <code>character</code> implementation. This is in part because we reuse our <code>startsWith</code> function. It magically accepts both characters and strings! Real languages might not be so flexible.</p>
+<pre><code>token(t) =
+    input =&gt; if input.startsWith(t) then
+                [(t, input[t.size:])]
+             else
+                []
+</code></pre>
+<p>We use our Python inspired notation <code>input[n:]</code> to snip of the the length of the token <code>t</code> from our input.</p>
+<h2 id="exercises-8"><a class="header" href="#exercises-8">Exercises</a></h2>
+<ol>
+<li>What is the type of the <code>token</code> function?</li>
+<li>Implement <code>token</code>.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="parse-a-predicate"><a class="header" href="#parse-a-predicate">Parse a Predicate</a></h1>
+<p>Just like we generalized <code>characterA</code> into <code>character</code>, we are going to generalize <code>character</code> into something we will call <code>satisfy</code>.</p>
+<p>The <code>satisfy</code> function will accept a <a href="https://en.wikipedia.org/wiki/Predicate_(mathematical_logic)"><em>predicate</em></a>, and returns a parser that will succeed when the input starts with a character that fulfills the predicate. A predicate is a function that accepts a character and returns a <code>boolean</code>.</p>
+<pre><code>char -&gt; boolean
+</code></pre>
+<p>As an example how we would want to use the <code>satisfy</code> function, we could write the following equation.</p>
+<pre><code>characterA == satisfy(c =&gt; c == 'A')
+</code></pre>
+<p>Here we have introduced the notation for a function without a name: <code>c =&gt; c == 'A'</code>. This notation can be read as follows</p>
+<ol>
+<li>The part before <code>=&gt;</code> names the parameter of the function.</li>
+<li>The part after <code>=&gt;</code> is the body of the function.</li>
+</ol>
+<p>In our example we have denoted a function that accepts a character <code>c</code> and returns true when that character equals <code>'A'</code>.</p>
+<p>Our expectations for the <code>satisfy</code> function are</p>
+<div class="table-wrapper"><table><thead><tr><th>input</th><th>predicate</th><th><em>satisfy(predicate)</em></th></tr></thead><tbody>
+<tr><td>"ABC"</td><td>c =&gt; c == 'A'</td><td>[('A', "BC")]</td></tr>
+<tr><td>"aBC"</td><td>c =&gt; c == 'a'</td><td>[('a', "BC")]</td></tr>
+<tr><td>"ABC"</td><td>c =&gt; c == '!'</td><td>[]</td></tr>
+</tbody></table>
+</div>
+<h2 id="implementation-3"><a class="header" href="#implementation-3">Implementation</a></h2>
+<p>The <code>satisfy</code> function is not that different from either the <code>character</code> or <code>token</code> functions. The difference are the clause in the <code>if</code>-expression, and how we return our input.</p>
+<pre><code>satisfy(predicate) =
+    input =&gt; if predicate(input[0]) then
+                [(input[0], input[1:])]
+             else
+                []
+</code></pre>
+<h2 id="exercises-9"><a class="header" href="#exercises-9">Exercises</a></h2>
+<ol>
+<li>What is the type of the <code>satisfy</code> function?</li>
+<li>Implement <code>satisfy</code>.</li>
+<li>Implement the <code>character</code> function in terms of the <code>satisfy</code> function.</li>
+<li>Does your implementation work correctly when the input is the empty string?</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="parse-this-or-that"><a class="header" href="#parse-this-or-that">Parse this or that</a></h1>
+<p>With some basic parsers under our belt, we can start looking at a combinator. A combinator is a function that <em>combines</em> simpler things into a more complex thing. In our case, it combines simpler parsers into a more complex parser.</p>
+<p>Sometimes you find yourself at a cross road. Either we want to parse a number, or we want to parse a variable name. If we have simpler parser that can parse a number and another parser that can parse a variable name, we can combine them into a more complex parser that could parse either of the two.</p>
+<p>Assuming we have parsers <code>A = character('A')</code> and <code>B = character('B')</code>, below you find a table of our expectations for the <code>or</code> combinator.</p>
+<div class="table-wrapper"><table><thead><tr><th>input</th><th><em>or(A, B)</em></th></tr></thead><tbody>
+<tr><td>"ABC"</td><td>[("A", "BC")]</td></tr>
+<tr><td>"BAC"</td><td>[("B", "AC")]</td></tr>
+<tr><td>"aBC"</td><td>[]</td></tr>
+</tbody></table>
+</div>
+<h2 id="signature-1"><a class="header" href="#signature-1">Signature</a></h2>
+<p>Remember, the type of a parser is <code>string -&gt; [(T, string)]</code> where <code>T</code> is a type variable representing the structure that is returned for this parser.</p>
+<p>A combinator is a <a href="https://en.wikipedia.org/wiki/Higher-order_function">higher order function</a>. I.e.</p>
+<blockquote>
+<p>a function that does at least one of the following:</p>
+<ul>
+<li>takes one or more functions as arguments,</li>
+<li>returns a function as its result.</li>
+</ul>
+</blockquote>
+<p>In our case it does both. We accept two parsers, which themselves are functions and in turn returns a parser, again a function. The type of <code>or</code> is</p>
+<pre><code>or : (string -&gt; [(T, string)]) -&gt; (string -&gt; [(T, string)]) -&gt; (string -&gt; [(T, string)])
+</code></pre>
+<p>or, if we abbreviate <code>string -&gt; [(T, string)]</code> to <code>parser T</code>, it could read</p>
+<pre><code>or : parser T -&gt; parser T -&gt; parser T
+</code></pre>
+<p>I.e. <code>or</code> is a function that accepts two parsers and returns a third.</p>
+<h2 id="implementation-4"><a class="header" href="#implementation-4">Implementation</a></h2>
+<p>When we think about an implementation of <code>or</code> we need to consider the two parsers that are used to construct the result parser. If we have a parser <code>A</code> that produces output <code>resultA</code> on input <code>I</code>, and a parser <code>B</code> that produces output <code>resultB</code> on input <code>I</code>, parser <code>or(A, B)</code> should produce the concatenation of <code>resultA</code> and <code>resultB</code> on input <code>I</code>.</p>
+<pre><code>or(A, B) =
+    input =&gt; A(input).concat(B(input))
+</code></pre>
+<h2 id="exercises-10"><a class="header" href="#exercises-10">Exercises</a></h2>
+<ol>
+<li>Implement the <code>or</code> combinator.</li>
+<li>If you want choose between multiple options to parse, how would you implement <code>or</code> in that case?</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="parse-this-and-then-that"><a class="header" href="#parse-this-and-then-that">Parse this and then that</a></h1>
+<p>What we are going to combine in this chapter is two parsers with the intent of parsing with the first parser <strong>and</strong> then parse the remaining input with the second parser.</p>
+<p>Let's assume again that we have parser <code>A = character('A')</code> and <code>B = character('B')</code>. The expectations of the <code>and</code> combinator are</p>
+<div class="table-wrapper"><table><thead><tr><th>input</th><th><em>and(A, B)</em></th></tr></thead><tbody>
+<tr><td>"ABC"</td><td>[(('A', 'B'), "C")]</td></tr>
+<tr><td>"ABCD"</td><td>[(('A', 'B'), "CD")]</td></tr>
+<tr><td>"aBC"</td><td>[]</td></tr>
+</tbody></table>
+</div>
+<p>Note that when the parser accepts its input, it returns a pair as a result. In our example it is a pair of characters, but it depends on the parser that we are combining.</p>
+<h2 id="exercises-11"><a class="header" href="#exercises-11">Exercises</a></h2>
+<ol>
+<li>What is the type of the <code>and</code> combinator?</li>
+<li>Create the <code>and</code> combinator.  Depending on your language it would be better to return a list of results instead of a pair.</li>
+<li>If you wanted to combine more than two consecutive parsers, how would you implement that?</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="just-all"><a class="header" href="#just-all">Just all</a></h1>
+<p>Some parsers accept only a part of their input. This is generally fine for intermediate parsers, but you generally want to accept the entire input for top-level parsers.</p>
+<p>The <code>just</code> parser does just that. It accepts a parsers and will only succeed when the remaining input is empty.</p>
+<div class="table-wrapper"><table><thead><tr><th>input</th><th><em>just(character('A'))</em></th></tr></thead><tbody>
+<tr><td>"ABC"</td><td>[]</td></tr>
+<tr><td>"A"</td><td>[('A', "")]</td></tr>
+<tr><td>"aBC"</td><td>[]</td></tr>
+</tbody></table>
+</div>
+<h2 id="implementation-5"><a class="header" href="#implementation-5">Implementation</a></h2>
+<p>Once we parsed our input, we need to remove the results that did not consume the entire input.</p>
+<pre><code>just(p) =
+    input =&gt; filter ((r, rest) =&gt; rest == "") (p input)
+</code></pre>
+<p>Here <code>filter</code> is a function that accepts a list and keeps all the elements in the list that satisfy the predicate.</p>
+<h2 id="exercises-12"><a class="header" href="#exercises-12">Exercises</a></h2>
+<ol>
+<li>What is the type of the <code>just</code> combinator?</li>
+<li>Implement the <code>just</code> combinator.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="transform-a-result"><a class="header" href="#transform-a-result">Transform a result</a></h1>
+<p>Sometimes you end up with a parser for a certain structure <code>A</code>, but you want to have a parser for an other structure <code>B</code>, which you now how to make from a structure <code>A</code>. For example, you have a parser that accepts a character <code>'7'</code>, but you want to have a parser that accepts the corresponding number <code>7</code>.</p>
+<p>The <code>map</code> parser combinator will help you out in this situation. It will accept a parser <code>string -&gt; [(A, string)]</code> and turn is into a parser <code>string -&gt; [(B, string)]</code>. For this you need to provide a transform function <code>A -&gt; B</code>.</p>
+<div class="table-wrapper"><table><thead><tr><th>Input</th><th>parser</th><th>transform</th><th><em>map(transform, parser)</em></th></tr></thead><tbody>
+<tr><td>"123"</td><td>satisfy(isDigit)</td><td>toInt</td><td>[(1, "23")]</td></tr>
+<tr><td>"ABC"</td><td>satisfy(isDigit)</td><td>toInt</td><td>[]</td></tr>
+</tbody></table>
+</div>
+<h2 id="implementation-6"><a class="header" href="#implementation-6">Implementation</a></h2>
+<p>For the <code>map</code> combinator we rely on the a function that can transform a list in the same way. We only need to change the first arguments of the tuples in our result list.</p>
+<pre><code>map(f, parser) =
+    input =&gt;
+        listMap ((r, rest) =&gt; (f(r), rest)) (parser input)
+</code></pre>
+<h2 id="exercises-13"><a class="header" href="#exercises-13">Exercises</a></h2>
+<ol>
+<li>What is the type of <code>map</code>?</li>
+<li>Implement the <code>map</code> combinator.</li>
+<li>If your languages does not have a <code>listMap</code>, how would you implement that?</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="being-lazy"><a class="header" href="#being-lazy">Being lazy</a></h1>
+<p>Up until now, our parser combinators are not <a href="https://en.wikipedia.org/wiki/Recursion">recursive</a>. Every combinator accepts one or more parsers and use combine them into a more complex parser.</p>
+<p>What we are about to do is define parser combinators that are defined in terms of <em>themselves</em>.</p>
+<p>This can be problematic. The problem is that our combinators have to return a parser. They can't predict how deeply nested a parser needs to be called. Take a look at the following grammar.</p>
+<pre><code>A ::= A | "a";
+</code></pre>
+<p>This grammar accepts any number of the character 'a'. If we naively write a parser we would might write the following.</p>
+<pre><code>A =
+    or(A(), character('a'))
+</code></pre>
+<p>The thoughts are: Our parser <code>A</code> is either</p>
+<ol>
+<li>our parser <code>A</code></li>
+<li>a character <code>'a'</code>.</li>
+</ol>
+<p>The first part is problematic, because when it calls the <code>A</code> parser it will go down an infinite path. If we would try to call <code>A</code> we would need to repeatedly call <code>A</code> without bounds.</p>
+<ul>
+<li><code>A()</code></li>
+<li><code>or(A(), character('a'))</code></li>
+<li><code>or(or(A(), character('a')), character('a'))</code></li>
+<li><code>or(or(or(A(), character('a')), character('a')), character('a'))</code></li>
+<li><code>or(or(or(or(A(), character('a')), character('a')), character('a')), character('a'))</code></li>
+<li>...</li>
+</ul>
+<h2 id="solution"><a class="header" href="#solution">Solution</a></h2>
+<p>One way to solve this problem is to delay the call to yourself. What we instead would like to say is, when it is time to parse some input I will produce a the parser that is going to do the parsing. So there are two ingredients: a parser producer, and a combinator that works in the above manner.</p>
+<h3 id="parser-producer"><a class="header" href="#parser-producer">Parser producer</a></h3>
+<p>We could use a function that accepts a dummy value as a producer. It's signature would be <code>() -&gt; string -&gt; [(T, string)]</code> or, using the parser alias, <code>() -&gt; parser T</code>.</p>
+<p>One could implement a producer with an anonymous function. Say we have a parser <code>A</code>, a producer of <code>A</code> could be implemented as</p>
+<pre><code>_ =&gt; A
+</code></pre>
+<p>Here we use an underscore <code>_</code> to signify that we are not interested in the actual argument.</p>
+<h3 id="combinator"><a class="header" href="#combinator">combinator</a></h3>
+<p>The last ingredient is a combinator that accepts a producer for a parser and returns a parser that uses it.</p>
+<pre><code>lazy(p) =
+    input =&gt; (p ())(input)
+</code></pre>
+<p>This might be hard to read. The first parenthesized part <code>(p ())</code> calls the producer. It will return a parser. That parser is then called with the input to return the parse result.</p>
+<h2 id="exercises-14"><a class="header" href="#exercises-14">Exercises</a></h2>
+<ol>
+<li>What is the type of the <code>lazy</code> combinator?</li>
+<li>Implement the <code>lazy</code> combinator.</li>
+<li>Is it possible not to use recursion?</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="parse-many-things"><a class="header" href="#parse-many-things">Parse many things</a></h1>
+<p>Parsing a single character, or a single character and then an other, will only get you so far. Sometimes you want to accept many things. This chapter introduces a parser combinator that does exactly this.</p>
+<p>The <code>many</code> combinator accepts a parser <code>p</code> and returns a parser that accepts input precisely when <code>p</code> succeeds any number of times.</p>
+<div class="table-wrapper"><table><thead><tr><th>Input</th><th><em>many(character('A'))</em></th></tr></thead><tbody>
+<tr><td>""</td><td>[([], "")]</td></tr>
+<tr><td>"A"</td><td>[(['A'], ""), ([], "A")]</td></tr>
+<tr><td>"AA"</td><td>[(['A', 'A'], ""), (['A'], "A"), ([], "AA")]</td></tr>
+<tr><td>"aAA"</td><td>[([], "aAA")]</td></tr>
+</tbody></table>
+</div>
+<p>This is the first time that a parser returns multiple possible results. The different results correspond with the different options. Any number of times include</p>
+<ul>
+<li>zero times</li>
+<li>one time</li>
+<li>two times</li>
+<li>three times</li>
+<li>etcetera</li>
+</ul>
+<p>This can be seen in our results. In the example with the input <code>"AA"</code> the parser <code>many(character('A'))</code> can parse</p>
+<ol>
+<li>Two 'A's, with no remaining input.</li>
+<li>One 'A', with remaining input "A".</li>
+<li>Zero 'A's, with remaining input "AA".</li>
+</ol>
+<p>All these results are returned, in the order from most input consumed to least input consumed.</p>
+<h2 id="implementation-7"><a class="header" href="#implementation-7">Implementation</a></h2>
+<p>The implementation of the <code>many</code> combinator is defined in terms of itself. The <code>lazy</code> combinator allows a call to the parser you are defining without blowing the call stack. Our pseudo-code had this build in 😁.</p>
+<pre><code>many(p) =
+    or(map(combine, and(p, many(p))), succeed([]))
+</code></pre>
+<p>We are relying on combinators from earlier chapters. Because of this the implementation is not as exact, leaving some ideas to be explored.</p>
+<h2 id="exercises-15"><a class="header" href="#exercises-15">Exercises</a></h2>
+<ol>
+<li>What is the type the <code>many</code> combinator?</li>
+<li>What is the type of the <code>combine</code> function used to map the result of parser <code>p</code> and then <code>many(p)</code>?</li>
+<li>Implement the <code>combine</code> function.</li>
+<li>Implement the <code>many</code> combinator. Don't forget to be lazy.</li>
+<li>The <code>many</code> combinator parses <em>zero</em> or more items. Create a combinator <code>many1</code> that parser <em>one</em> or more items.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="it-does-not-end-here"><a class="header" href="#it-does-not-end-here">It does not end here</a></h1>
+<p>We have created a number of basic parsers and combinators for them. But it does not end here.</p>
+<p>Not all combinators that could come in handy are already defined. Some of them are presented in the utilities section, others are only discovered after using the parser combinator framework.</p>
+<p>If you want to try your hand on creating other parser combinators that serve a certain purpose, stick around.</p>
+<p>If instead you would like to use them to parse an interesting structure, take a look at the projects section.</p>
+<h2 id="time-to-spread-your-wings"><a class="header" href="#time-to-spread-your-wings">Time to spread your wings</a></h2>
+<p>In the preceding chapters there was pseudo code that provided hints on how to implement certain parser.</p>
+<p>Now is the time to spread your wings and take to the skies without our hints. You will not find pseudo code anymore. Partly because it allows you to cement the knowledge obtained from the workshop. Partly because the pseudo code is for all intents and purposes indistinct from an actual implementation.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="ignore-the-result"><a class="header" href="#ignore-the-result">Ignore the result</a></h1>
+<p>Sometimes you are not that interested in the result of a parser. For example, if you are parsing a tuple at one point you need to parse the character <code>'('</code>. But you don't really need the actual character. You just want to make sure that the parse succeeds.</p>
+<p>This is where the <code>ignore</code> parser combinator comes in. It accepts a parser <code>p</code> and parses the same input as <code>p</code> would do. The only difference is that it ignores the resulting value. Instead it returns a dummy value.</p>
+<h2 id="exercises-16"><a class="header" href="#exercises-16">Exercises</a></h2>
+<ol>
+<li>What is the signature of the <code>ignore</code> parser combinator?</li>
+<li>Implement the <code>ignore</code> parser.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="commit-to-the-first-result"><a class="header" href="#commit-to-the-first-result">Commit to the first result</a></h1>
+<p>Sometimes you are not interested in all possible ways of parsing input into a data structure. You are happy with the first successful parse.</p>
+<p>The <code>first</code> parser does precisely that. Instead of returning all the possible parsing of an input, it only returns the first.</p>
+<h2 id="exercises-17"><a class="header" href="#exercises-17">Exercises</a></h2>
+<ol>
+<li>What is the signature of the <code>first</code> parser?</li>
+<li>Implement the <code>first</code> parser.</li>
+<li>How does the order of alternatives influence the semantics of <code>first</code>?</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="greedy-parsing"><a class="header" href="#greedy-parsing">Greedy parsing</a></h1>
+<p>There are times that you just want to be greedy. Take what every you can get and continue.</p>
+<p>The <code>greedy</code> parser is your friend. It will execute the task above for you.</p>
+<h2 id="exercises-18"><a class="header" href="#exercises-18">Exercises</a></h2>
+<ol>
+<li>What is the signature of the <code>greedy</code> parser?</li>
+<li>Implement the <code>greedy</code> parser. Try to express it as a combination of other parsers.</li>
+<li>The companion to <code>many</code> is <code>many1</code>. Implement a <code>greed1</code> parser.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="consecutive-parsers"><a class="header" href="#consecutive-parsers">Consecutive parsers</a></h1>
+<p>The <code>and</code> parser is a happy little parser combinator. It takes two parsers and runs them consecutively, feeding the remaining input of the first parse into the second parser, returning the pair of results.</p>
+<p>The only problem with the <code>and</code> parser is that it only accepts two parsers. Often you find yourself wanting to parser any number of parsers consecutively. For example, in order to parse a pair of a name and an integer, you would have to parse the following structures</p>
+<ol>
+<li>Parse a character <code>'('</code>.</li>
+<li>Parse any name.</li>
+<li>Parse a character <code>','</code>.</li>
+<li>Parse any integer.</li>
+<li>Parse a character <code>')'</code>.</li>
+</ol>
+<p>And combine the result of the name parser and the integer parser into a pair of the two.</p>
+<p>The <code>consecutive</code> parser will be build for this task. It accepts a sequence of parsers and a way to combine the intermediate results into a final result.</p>
+<h2 id="exercises-19"><a class="header" href="#exercises-19">Exercises</a></h2>
+<ol>
+<li>What is the signature of the <code>consecutive</code> parser? Depending on the language you are working with, this can be a tricky question. Don't be afraid to sacrifice generality for practicality.</li>
+<li>Implement the <code>consecutive</code> parser.</li>
+<li>Use the <code>consecutive</code> parser to parse the tuple from the example.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="oneof-the-following-parsers"><a class="header" href="#oneof-the-following-parsers">Oneof the following parsers</a></h1>
+<p>What <code>consecutive</code> is to <code>and</code>, <code>oneOf</code> is to <code>or</code>.</p>
+<p>Just like the case for the <code>and</code> parser combinator, the <code>or</code> parser combinator only accepts two parsers. Often there a multiple alternatives that you want to combine. For example, when you are creating a full-blown programming language, an expression could be a number of things. Among the options there would be</p>
+<ul>
+<li>an assignment</li>
+<li>an arithmetical expression</li>
+<li>a logical expression</li>
+<li>a ternary expression</li>
+</ul>
+<h2 id="exercises-20"><a class="header" href="#exercises-20">Exercises</a></h2>
+<ol>
+<li>What is the signature of the <code>oneOf</code> parser combinator?</li>
+<li>Implement the <code>oneOf</code> parser combinator.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="whitespace"><a class="header" href="#whitespace">Whitespace</a></h1>
+<p>When parsing certain input, we are often not interested in the whitespace that is present. For example, the following expression should all result in the same data structure.</p>
+<ul>
+<li><code>5*2+1</code></li>
+<li><code>5*2 + 1</code></li>
+<li><code>5 * 2 + 1</code></li>
+<li><code>  5  *    2  +   1</code></li>
+</ul>
+<h2 id="what-is-whitespace"><a class="header" href="#what-is-whitespace">What is whitespace?</a></h2>
+<p>Depending on your use case whitespace could mean different things. It could be just a space, just a tab, just a newline or any combination of the mentioned, and possibly other, characters.</p>
+<p>But once a choice is made, one could create a parser for it. We will call this parser <code>whitespace</code>.</p>
+<h2 id="ignore-whitespace-prefix"><a class="header" href="#ignore-whitespace-prefix">Ignore whitespace prefix</a></h2>
+<p>If whitespace is not important for the input that you are parsing, it can be ignored. A usefull parser combinator in this case is the <code>sp</code> parser combinator. It accepts a parser <code>p</code> and parses everything that <code>p</code> parses, even if it is preceded by any amount of whitespace.</p>
+<div class="table-wrapper"><table><thead><tr><th><em>input</em></th><th><em>character('A')</em></th><th><em>sp(character('A'))</em></th></tr></thead><tbody>
+<tr><td>"ABC"</td><td>[('A', "BC")]</td><td>[('A', "BC")]</td></tr>
+<tr><td>" ABC"</td><td>[]</td><td>[('A', "BC")]</td></tr>
+<tr><td>"  ABC"</td><td>[]</td><td>[('A', "BC")]</td></tr>
+</tbody></table>
+</div>
+<p>The above table provides an example of the <code>sp</code> parser combinator. Where <code>character('A')</code> would fail if the string starts with any number of whitespace, the <code>sp(character('A'))</code> ignores the whitespace prefix and returns the wanted result.</p>
+<h2 id="exercises-21"><a class="header" href="#exercises-21">Exercises</a></h2>
+<ol>
+<li>What is the signature of the <code>whitespace</code> parser?</li>
+<li>Implement the <code>whitespace</code> parser.</li>
+<li>What is the signature of the <code>sp</code> parser combinator?</li>
+<li>Implement the <code>sp</code> parser combinator.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="packing-parser"><a class="header" href="#packing-parser">Packing parser</a></h1>
+<p>Often we want to parse some data that is surrounded with some structure. For example, some programming languages delineate blocks of code by a matched pair of curly braces. A literal list of items starts with an opening bracket and is finished with a closing bracket.</p>
+<p>The <code>pack</code> parser combinator accepts three parser. It "packs" the second parser in between the opening parser and the closing parser.</p>
+<h2 id="exercises-22"><a class="header" href="#exercises-22">Exercises</a></h2>
+<ol>
+<li>What is the signature of the <code>pack</code> parser combinator?</li>
+<li>Implement the <code>pack</code> parser combinator.</li>
+<li>Define a parser combinator <code>parenthesized</code> that packs a parser with a matching pair of parenthesis.</li>
+<li>Simiarly define a <code>bracketed</code> parser.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="separating-parser"><a class="header" href="#separating-parser">Separating parser</a></h1>
+<p>Lists, or other repetitive structures, often have some sort of separator that distinguishes between where one item stops and the next begins. In the case of a list of integers, a <code>','</code> would be used as separator. In some programming languages the <code>';'</code> is used for similar purpose.</p>
+<p>The <code>separatedBy</code> parser combinator will be used in this situation. It accepts two parsers. One parser will parse the separator, the other the structure that is separated.</p>
+<h2 id="exercises-23"><a class="header" href="#exercises-23">Exercises</a></h2>
+<ol>
+<li>What is the signature of the <code>separatedBy</code> parser combinator?</li>
+<li>Implement the <code>separatedBy</code> parser combinator.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="how-to-use-it"><a class="header" href="#how-to-use-it">How to use it</a></h1>
+<p>We have created a parser combinator framework that allows us to construct parsers by combining basic parsers into more elaborate parsers. But how do we use them?</p>
+<p>This section of the workshop presents to you various projects to solidify your understanding of parser combinators and how to use them. All projects follow more or less the following structure.</p>
+<ol>
+<li>Identify what structure your want to end up with.</li>
+<li>Create does structures in code.</li>
+<li>Devise a grammar for how you want to describe those structures.</li>
+<li>Create a parser for the grammar.</li>
+</ol>
+<p>All these steps and variants have real world counterparts. The most important one is step 1, what the structure do you want to work with. All steps follow from that.</p>
+<p>Because this is a workshop focusses on parser combinators, the realm that makes step 4 possible, the projects in this sections are providing steps 1 and 3 for you. You are still asked to implement the structures that you are going to work with, but that is mainly because you are free to choose your favorite programming language.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="list-of-things"><a class="header" href="#list-of-things">List of things</a></h1>
+<p>The first project we are going to take on is to parse a list of elements. For demonstration purposes the element will be either a character <code>'A'</code> or a character <code>'B'</code>. This way we can focus on the the list part of parsing a list. Do make sure to accept a the element parser as a parameter. This makes it easy to change the element parser later on.</p>
+<p>For the record, a list is denoted by:</p>
+<ol>
+<li>An opening bracket <code>'['</code>.</li>
+<li>A comma seperated list of elements.</li>
+<li>A closing bracket <code>']'</code>.</li>
+</ol>
+<p>The <code>list</code> parser combinator accepts an element parser and returns a parser that can parse a list of elements.</p>
+<h2 id="exercises-24"><a class="header" href="#exercises-24">Exercises</a></h2>
+<ol>
+<li>What is the signature of the <code>list</code> parser combinator.</li>
+<li>Implement the <code>list</code> parser combinator, making use of the combinators in your framework.</li>
+<li>Create a parser that parses either a character <code>'A'</code> or a character <code>'B'</code>.</li>
+<li>Create a parser that parses a list of <code>'A'</code>s and <code>'B'</code>s.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="balanced-parentheses"><a class="header" href="#balanced-parentheses">Balanced parentheses</a></h1>
+<p>The next project to grasp is parsing balanced parentheses. We will dispense with the content inside the parentheses and just focus on the structure of the parentheses.</p>
+<h2 id="grammar"><a class="header" href="#grammar">Grammar</a></h2>
+<p>Below we will give a grammar for balanced parentheses:</p>
+<pre><code>S := "(" S ")" S | ""
+</code></pre>
+<p>Which in plain english is describing balanced parentheses as either</p>
+<ol>
+<li>a opening parenthesis, followed by balanced parentheses, followed by a closing parenthesis, followed by balanced parentheses.</li>
+<li>an empty string</li>
+</ol>
+<p>The empty string alternative serves as a base case. Without it, we would have no way to stop accepting parentheses.</p>
+<h2 id="structure"><a class="header" href="#structure">Structure</a></h2>
+<p>We would like to define a data structure that reflects the structure of the balanced parentheses. A <a href="https://en.wikipedia.org/wiki/Binary_tree">binary tree</a> fits nicely.</p>
+<p>A <em>binary tree</em> has two alternatives. It is either a <em>leaf</em> that holds not no data. Or it is a <em>node</em> that contains two children, who both are trees. The children are called the <em>left child</em> and the <em>right child</em>. The left child represents the resultant tree from the first <code>S</code> in the production, the right child represents the resultant tree from the second <code>S</code> in the production.</p>
+<h2 id="exercises-25"><a class="header" href="#exercises-25">Exercises</a></h2>
+<ol>
+<li>Represent a binary tree in code.</li>
+<li>Which trees do the following inputs represent: <code>"()"</code>, <code>"(())()"</code> and <code>"()(()())()"</code>?</li>
+<li>What is the signature of the parser that can parse trees?</li>
+<li>Create a parser that can parse trees.</li>
+</ol>
+<h3 id="extra-credit"><a class="header" href="#extra-credit">Extra credit</a></h3>
+<p>Formally balanced parentheses are a <a href="https://en.wikipedia.org/wiki/Dyck_language">Dyck language</a>. In this project we restricted our language to only use matching pairs of parentheses. But we could mix and match delimiters. For example, we could be interested in the language of properly matched pairs of parentheses <code>()</code> and brackets <code>[]</code>.</p>
+<p>How would the grammar change to allow different pairs of delimiters? How would the parser change? Can you generalize the parser of an arbitrary set of matching delimiters?</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="template-language"><a class="header" href="#template-language">Template Language</a></h1>
+<p>Sometimes you want a template that can be specialized with a certain context. For example, the template <code>"Hello, {subject}!"</code> evaluated in the context <code>subject =&gt; "World"</code> should produce `"Hello, World!".</p>
+<h2 id="grammar-1"><a class="header" href="#grammar-1">Grammar</a></h2>
+<p>The grammar for this template language is a little subtle. In broad strokes there are two different parts. <em>Literal text</em>, like <code>"Hello, "</code> and <code>"!"</code> from our example. And <em>substitutions</em>, like <code>"{subject}"</code>. Substitutions are formed by wrapping an identifier with a matching pair of braces.</p>
+<p>Literal text seems straightforward. But what if your text contains a literal <code>{</code>? This could certainly trip up a naive parser. You can escape the problem, by escaping the <code>{</code>. This allows the parser to differentiate between a start of a substitution and a literal opening brace.</p>
+<p>Often one uses the backslash <code>\</code> to escape the following character. That would become <code>\{</code> in our case. If you think this through you will notice a problem with this "solution". How to include a literal <code>\</code>? Luckily one can use the same method: escape it!</p>
+<pre><code>S := (Literal|Substitution)*
+Substitution := "{" Variable "}"
+Variable := Alpha+
+Alpha := 'a'|'b'|'c'|...|'z'|'A'|'B'|...|'Z'
+Literal := (Escaped|Allowed)+
+Escaped := "\\"|"\{"
+Allowed := &lt;any character not an '\' or '{'&gt;
+</code></pre>
+<h2 id="data-structure"><a class="header" href="#data-structure">Data Structure</a></h2>
+<p>The data structures that are involved in presenting the user with a template is have a common interface. They can be evaluated in a context to produce a string.</p>
+<p>Depending on your temperament you could differentiate between the following distinct templates:</p>
+<ol>
+<li>Literal template</li>
+<li>Substitution</li>
+<li>Concatenation of sub-templates</li>
+</ol>
+<h3 id="literal-template"><a class="header" href="#literal-template">Literal Template</a></h3>
+<p>When a literal template is evaluated, it ignores the context and produces the literal string it represents.</p>
+<h3 id="substitution"><a class="header" href="#substitution">Substitution</a></h3>
+<p>When a substitution is evaluated, it looks up the string associated with the variable in the current context, and produces that result.</p>
+<h3 id="concatenation"><a class="header" href="#concatenation">Concatenation</a></h3>
+<p>When a concatenation of templates is evaluated, each sub-templates is evaluated, and the produced results are strung together in order.</p>
+<h2 id="exercises-26"><a class="header" href="#exercises-26">Exercises</a></h2>
+<ol>
+<li>What is the signature of the context? What is a data structure that matches that signature?</li>
+<li>Create different data structures to match the proposed templates.</li>
+<li>What is the signature of the template parser?</li>
+<li>Create the template parser.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="aritmetic-expression"><a class="header" href="#aritmetic-expression">Aritmetic Expression</a></h1>
+<p>In this chapter we will parse aritmetical expression. For us that will mean expressions involving integers, variables, addition, subtraction, multiplication and division. An example of such an expresion would be <code>5*2+1</code>.</p>
+<h2 id="grammar-2"><a class="header" href="#grammar-2">Grammar</a></h2>
+<p>The grammar for our expression is as follows</p>
+<pre><code>Expression ::= Term ('+'|'-') Expression | Term
+Term ::= Factor ('*'|'/') Term | Factor
+Factor ::= Constant | Variable | '(' Expression ')'
+Constant ::= Digit+
+Variable ::= Alpha+
+Digit ::= '0' | '1' | '2' | ... | '9'
+Alpha ::= 'a' | 'b' | ... | 'z | 'A' | 'B' | ... | 'Z'
+</code></pre>
+<h2 id="data-structure-1"><a class="header" href="#data-structure-1">Data Structure</a></h2>
+<p>A data structure that can represent an expression should cater for the following variants</p>
+<ol>
+<li>Constant, containing the integer it represents</li>
+<li>Variable, containing the name of a value in the context.</li>
+<li>and the four operators, Addition, Subtraction, Multiplication, Division</li>
+</ol>
+<h2 id="exercises-27"><a class="header" href="#exercises-27">Exercises</a></h2>
+<ol>
+<li>Create a parser that can parse an expression.</li>
+<li>Create an evaluate function that takes an expression and a context and returns the corresponding value.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="solutions"><a class="header" href="#solutions">Solutions</a></h1>
+<p>In this section you will find solutions some of the exercises of this workshop.</p>
+<p>The reason we included these answers is to be self-contained. We would much prefer if you would discuss your solutions with others and discuss the reasons why you decided to answer the questions in the manner you did.</p>
+<h2 id="prelimenaries"><a class="header" href="#prelimenaries">Prelimenaries</a></h2>
+<h3 id="languages-1"><a class="header" href="#languages-1">Languages</a></h3>
+<ol>
+<li>The language of all the wrong ways of spelling bananan: <code>{"banan", "bananana", "ban", ...}</code></li>
+<li>I think the English languages is finite for it is not possible to concatenate words in the English languages and form valid words. For this reason I think that Dutch is an infinite language.</li>
+</ol>
+<h3 id="ebnf-1"><a class="header" href="#ebnf-1">EBNF</a></h3>
+<ol>
+<li>Using the natural number from the chapter we could have</li>
+</ol>
+<pre><code>addition ::= number ("+" number)?
+</code></pre>
+<h3 id="types-1"><a class="header" href="#types-1">Types</a></h3>
+<ol>
+<li>The types describes a function that accepts a string and returns a list of pairs of string and integer. An example of such functions would be a function that determines the frequency of all the words that occur in a text.</li>
+<li><code>S -&gt; U -&gt; T</code>.</li>
+</ol>
+<h3 id="style-1"><a class="header" href="#style-1">Style</a></h3>
+<ol>
+<li>Currently, I am very interested in the <a href="https://github.com/uwu-tech/Kind">Kind programming language</a>. It is a dependently typed, functional programming language.</li>
+<li>I like a lot of styles. I am particular fond of logic programming.</li>
+<li>I worked through the workshop various times. I have picked object oriented styles and functional styles.</li>
+</ol>
+<h3 id="parser"><a class="header" href="#parser">Parser</a></h3>
+<ol>
+<li><code>t</code> is the twentiest letter in the alphabet. Including the digits '0' through '9' we have 30 options. So base 30 is an option. Note that there are other options as well.</li>
+<li>If using an object oriented programming language, I could implement the following interface. Each parser object should have a method called <code>parse</code> that accepts a string and returns a list of paris of <code>T</code> and <code>string</code>.</li>
+<li>I would introduce a result type that differentiates between the return values of a parser: failed, succesfull.</li>
+<li>I would keep track of the the position in the original string the remaining input is from. This way I could provide some extra information when a parse failed.</li>
+</ol>
+<h2 id="workshop"><a class="header" href="#workshop">Workshop</a></h2>
+<p>Some of the questions in this chapter ask for an implementation. See the example code accompanying this material for possible ways of implementing the <code>succeed</code> and <code>fail</code> parsers.</p>
+<h3 id="succeed-and-friends-1"><a class="header" href="#succeed-and-friends-1">Succeed and Friends</a></h3>
+<ol>
+<li>The <code>succeed("Hello, World!")</code> is a parser that does not consume the any input and always returns <code>"Hello, World"</code>.</li>
+<li><code>() -&gt; string -&gt; [()]</code>.</li>
+</ol>
+<h3 id="character-a-1"><a class="header" href="#character-a-1">Character A</a></h3>
+<ol>
+<li><code>string -&gt; [(string, string)]</code>.</li>
+<li>If my language of choices does not have a <code>startsWith</code> function but does allow indexing into the string I would implement it by examining the 0th character of the string.</li>
+</ol>
+<h3 id="any-character-1"><a class="header" href="#any-character-1">Any character</a></h3>
+<ol>
+<li><code>string -&gt; string -&gt; [(string, string)]</code>. At least this is what the examples show. It would be better if the examples would return the actual character. Then the signature would be <code>char -&gt; string -&gt; [(char, string)]</code>.</li>
+<li><code>characterA = character('A')</code>.</li>
+</ol>
+<h3 id="parse-a-token-1"><a class="header" href="#parse-a-token-1">Parse a Token</a></h3>
+<ol>
+<li><code>string -&gt; string -&gt; [(string, string)]</code>.</li>
+</ol>
+<h3 id="parse-a-predicate-1"><a class="header" href="#parse-a-predicate-1">Parse a predicate</a></h3>
+<ol>
+<li><code>(char -&gt; boolean) -&gt; string -&gt; [(char, string)]</code></li>
+<li><code>character(target) = satisfy(actual =&gt; actual == target)</code></li>
+<li>Why, of course. Thank you for asking.</li>
+</ol>
+<h3 id="parsing-this-or-that"><a class="header" href="#parsing-this-or-that">Parsing this or that</a></h3>
+<ol start="2">
+<li>If I would want to accept more than one parser as an alternative, I would accept a list of parsers. The implementation would concatenate all the results from calling the given parsers on the input.</li>
+</ol>
+<h3 id="parsing-this-and-that"><a class="header" href="#parsing-this-and-that">Parsing this and that</a></h3>
+<ol>
+<li><code>(string -&gt; [(A, string)]) -&gt; (string -&gt; [(B, string)]) -&gt; string -&gt; [((A, B), string)]</code>. Or with the <code>parser T</code> alias: <code>parser A -&gt; parser B -&gt; parser (A, B)</code>.</li>
+<li>If I would want to accept more than one parse as an string those parsers together, I would accept a list of parsers. I would implement a recursive call differentiating between an empty list and a non-empty list.</li>
+</ol>
+<h3 id="just-all-1"><a class="header" href="#just-all-1">Just All</a></h3>
+<ol>
+<li><code>parser T -&gt; parser T</code>.</li>
+</ol>
+<h3 id="transform-a-result-1"><a class="header" href="#transform-a-result-1">Transform a Result</a></h3>
+<ol>
+<li><code>(A -&gt; B) -&gt; parser A -&gt; parser B</code>.</li>
+<li>I would implement a recursive function, differentiating between an empty list and a non-empty list.</li>
+</ol>
+<h3 id="being-lazy-1"><a class="header" href="#being-lazy-1">Being Lazy</a></h3>
+<ol>
+<li><code>(() -&gt; parser T) -&gt; parser T</code>.</li>
+<li>Yes, but this highly depends on your language.</li>
+</ol>
+<h3 id="parse-many-things-1"><a class="header" href="#parse-many-things-1">Parse Many Things</a></h3>
+<ol>
+<li><code>parser T -&gt; parser [T]</code>.</li>
+<li><code>(T, [T] -&gt; [T]</code>.</li>
+<li><code>many1(parser) = map(combine, and(parser, many(parser)))</code>.</li>
+</ol>
+<h2 id="utilities"><a class="header" href="#utilities">Utilities</a></h2>
+<h3 id="ignore-the-result-1"><a class="header" href="#ignore-the-result-1">Ignore the Result</a></h3>
+<ol>
+<li><code>parser T -&gt; parser ()</code>.</li>
+</ol>
+<h3 id="commit-to-the-first-result-1"><a class="header" href="#commit-to-the-first-result-1">Commit to the First Result</a></h3>
+<ol>
+<li><code>parser T -&gt; parser T</code>.</li>
+<li>The order in which influence the semantics of first. It changes from the longest match to the shortest match.</li>
+</ol>
+<h3 id="greedy-parsing-1"><a class="header" href="#greedy-parsing-1">Greedy Parsing</a></h3>
+<ol>
+<li><code>parser T -&gt; parser T</code>.</li>
+<li><code>greedy1(parser) = map(combine, and(parser, greedy(parser)))</code>.</li>
+</ol>
+<h3 id="consecutive-parsers-1"><a class="header" href="#consecutive-parsers-1">Consecutive Parsers</a></h3>
+<ol>
+<li><code>[parser T] -&gt; parser [T]</code>. This forces all the parsers to return similar things.</li>
+</ol>
+<h3 id="one-of-the-following-parsers"><a class="header" href="#one-of-the-following-parsers">One of the Following Parsers</a></h3>
+<ol>
+<li><code>[parser T] -&gt; parser T</code>.</li>
+</ol>
+<h3 id="whitespace-1"><a class="header" href="#whitespace-1">Whitespace</a></h3>
+<ol>
+<li><code>parser ()</code>.</li>
+<li><code>parser T -&gt; parser T</code>.</li>
+</ol>
+<h3 id="packing-parser-1"><a class="header" href="#packing-parser-1">Packing Parser</a></h3>
+<ol>
+<li><code>parser L -&gt; parser T -&gt; parser R -&gt; parser T</code>.</li>
+</ol>
+<h3 id="separating-parser-1"><a class="header" href="#separating-parser-1">Separating Parser</a></h3>
+<ol>
+<li><code>parser string -&gt; parser T -&gt; parser [T]</code>.</li>
+</ol>
+<h2 id="projects"><a class="header" href="#projects">Projects</a></h2>
+<h3 id="list-of-things-1"><a class="header" href="#list-of-things-1">List of Things</a></h3>
+<ol>
+<li><code>parser T -&gt; parser [T]</code>.</li>
+</ol>
+<h3 id="balanced-parenthesis"><a class="header" href="#balanced-parenthesis">Balanced Parenthesis</a></h3>
+<ol start="3">
+<li><code>parser Tree</code>.</li>
+</ol>
+<h3 id="template-language-1"><a class="header" href="#template-language-1">Template Language</a></h3>
+<ol>
+<li><code>string -&gt; T</code>. A dictionary.</li>
+<li><code>parser ((string -&gt; T) -&gt; string)</code>. This signature assumes that a key is not present in the dictionary, the key is used as a default.</li>
+</ol>
+<h3 id="arithmetic-expression"><a class="header" href="#arithmetic-expression">Arithmetic Expression</a></h3>
+<blockquote>
+<p>This paragraph intentionally is left blank</p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="sources"><a class="header" href="#sources">Sources</a></h1>
+<p>The sources for this workshop and related files can be found at</p>
+<p><a href="https://github.com/fifth-postulate/parser-combinators">https://github.com/fifth-postulate/parser-combinators</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mediography"><a class="header" href="#mediography">Mediography</a></h1>
+<p>There are a lot of resources on the internet about parser combinators. We have a curated list of resources on the <a href="https://github.com/fifth-postulate/parser-combinators/wiki/Mediography">wiki page</a> accompanying this workshop.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
