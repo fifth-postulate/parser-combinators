@@ -1,4 +1,4 @@
-On the interface of systems data often gets transformed from one form to the other. With the ubiquitous data-format JSON this is often unnoticed. One just includes a library and maybe set some annotations are done.
+On the interface of systems data often gets transformed from one form to the other. With the ubiquitous data-format JSON this is often unnoticed. One just includes a library and maybe set some annotations and be done.
 
 You're not always that lucky. Sometimes it is necessary to handle data in an unconventional, or ad-hoc, format. Without the crutch of a library to rely on developers need to express in code how to transform one kind of data into an in-memory representation of the model the data represents. This is called parsing and it is an important tool in a developer's toolbox. However, developers often use sub-par mimicries of actual parsers that barely do the job.
 
